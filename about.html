@@ -49,6 +49,19 @@
             margin: 1rem 0; */
             /* overflow-x: auto; */
         }
+
+        figure {
+            margin: 0;
+            text-align: center;  /* Centers the image and caption */
+        }
+
+        figcaption {
+            text-decoration: underline;
+            font-size: 12px;
+            margin-top: 1px;  /* Adds space between the image and caption */
+            font-style: italic;  /* Optional styling */
+            color: #666;  /* Optional styling */
+        }
     </style>
 </head>
 <body>
@@ -57,6 +70,8 @@
             <a href="index.html">Home</a>
             <a href="about.html" class="active">About</a>
             <a href="token.html">$BON</a>
+            <a href="foundation.html">Foundation</a>
+            <a href="collective.html">Collective</a>
             <a href="https://bonsol.sh/" target="_blank">Docs</a>
             <a href="https://x.com/Bonsolsh" target="_blank">X</a>
         </nav>
@@ -64,15 +79,17 @@
         <h1>乃ㄖ几丂ㄖㄥ</h1>
 
         <pre>
-            Verifiable compute for Solana.
+            Everything Possible on Solana
+            <!-- Verifiable compute for Solana. -->
         </pre>
     </div>
 
     <div class="content">
-        <p>Verifiable Compute ("VC") is a cryptographic technique that centers on running a specific workload in a way that produces an attestation of its workings which can be publicly verified without running the computation again. In practice, VC utilizes different cryptographic primitives to ensure computational integrity. Ultimately, this enables external parties to run computations on behalf of a user while ensuring the validity of the computation's inputs, outputs, and methods. The cost benefits and efficiencies of this approach are massive at scale.</p>
+        <p>Verifiable Compute (VC) is a cryptographic technique that centers on running a specific workload in a way that produces an attestation of its workings which can be publicly verified without running the computation again. In practice, VC utilizes different cryptographic primitives to ensure computational integrity. Ultimately, this enables external parties to run computations on behalf of a user while ensuring the validity of the computation's inputs, outputs, and methods. The cost benefits and efficiencies of this approach are massive at scale.</p>
 
         <p>Bonsol is a public good for enabling VC on Solana by providing:</p>
         <ul>
+            <!-- A prover network for producing and consuming proofs-->
             <li>A marketplace for producing and consuming proofs</li>
             <li>Libraries and SDKs for easy application integration</li>
             <li>Economic incentives that align the entire network</li>
@@ -80,9 +97,11 @@
 
         <p>Its objectives are:</p>
         <ul>
-            <li><strong>Fair Pricing:</strong> The most competitive and fair pricing for verifiable compute tasks in a way that's fair to provers and consumers.</li>
-            <li><strong>Quality of Service:</strong> Lowest latency of response times for workload requests with consistent accuracy for the responses received.</li>
+            <li><strong>Fair Pricing:</strong> The most competitive and fair pricing for verifiable compute tasks - in a way that is fair to provers and consumers.</li>
+            <li><strong>Quality of Service:</strong> Lowest latency of response times for workload requests with consistent accuracy for the responses received.</li> 
+            <!-- Lowest latency of response times for workload requests and consistent accuracy for the responses received. -->
             <li><strong>Decentralization:</strong> Without compromising to become centralized.</li>
+            <br>
         </ul>
     </div>
 
@@ -92,10 +111,39 @@
             <p>The engine behind a fully decentralized Bonsol, providing resources for completing workload requests.</p>
                 
             <h3>Consumers</h3>
-            <p>Applications and individuals requiring off-chain computation solutions.</p>
+            <p>Applications and individuals requiring off-chain computation solutions.</p> <!-- and on-chain verification -->
                 
             <h3>Contributors</h3>
             <p>Developers and researchers who contribute to Bonsol's codebase, documentation, and research.</p>
+            <br>
+            <figure>
+                <img src="images/ecosystemAgents.png" alt="Ecosystem Agents" title="Ecosystem Flywheel" width="600" height="398">
+                <figcaption>Ecosystem Flywheel</figcaption>
+            </figure>
+            
     </div>
+
+    <div class="content">
+        <h2>Bonsol Workflow</h2>
+        <p>The Bonsol workflow is as follows:</p>
+        <ol>
+            <li><b>Create Execution Request: </b>A consumer (e.g. a Solana program) initiates a VC task by creating an Execution Request (ER). This ER contains information about the ZK program they would like to execute, the inputs, the time interval in which the compute workload must be proven and a tip to incentive provers.</li>
+            <li><b>Broadcast Execution Request: </b>The ER gets broadcasted to a set of provers and they must decide if they want to claim the execution request and start proving.</li>
+            <li><b>Claim Execution Request: </b>If a prover decides they want to perform this computation they submit a claim on it. If they are the first to get the claim, then their proof will be accepted until a certain time. If they fail to produce the proof in time, other provers can claim the execution. In order to claim the producer must put up some stake that will be slashed if they fail to produce a correct proof.</li>
+        </ol>
+    </div>
+
+    <!-- Tech Stack 
+    <div class="content">
+        <h2><u>Tech Stack</u></h2>
+            <h3>Main Components</h3>
+            <p> <b>Prover:</b> Prover nodes listen for execution requests, produce proofs, and submit the proof to the Solana blockchain.</p>
+            <p> <b>Verifier:</b> a program that runs on Solana, responsible for proof verification and forwarding the output to the callback program.</p>
+            <p> <b>Program Registry:</b> Each deployed zkprogram (risc0 compiled guest image) has an on-chain record that contains the image id, the image size, the required inputs and the url of the image</p>
+            <h3>Optional Components</h3>
+            <p> <b>Callback Program:</b> The callback program receives the output from the verifier, and the developer can do anything you want with it.</p>
+            <p> <b>Private Input Server:</b> If your program requires private inputs, you can use the Private Input Server to request them from the user. It is a server that the developer may run so that an authenticated prover can grab the private inputs for the computation</p>
+    </div>
+    -->
 </body>
 </html> 
