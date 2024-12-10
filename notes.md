@@ -53,6 +53,7 @@ Example Scenarios:
 | High        | 1.0 | 0.1   | 0.01    | Significantly higher fees for complex computations |
 | Extreme     | 1.0 | 0.5   | 0.1     | Very aggressive scaling for complex computations |
 
+(wrong math below)
 Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
 | Demand Level | Calculation         | Total |
 |--------------|---------------------|-------|
@@ -60,6 +61,15 @@ Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
 | Normal       | 100 + 10 + 10      | 120   |
 | High         | 100 + 100 + 100    | 300   |
 | Extreme      | 100 + 500 + 1000   | 1600  |
+
+(correct math)
+Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
+| Demand Level | Calculation         | Total |
+|--------------|---------------------|-------|
+| Low          | 100 + 10 + 1        | 111   |
+| Normal       | 100 + 100 + 10      | 210   |
+| High         | 100 + 1000 + 100    | 1200   |
+| Extreme      | 100 + 5000 + 1000   | 6100  |
 
 ## Dynamic Base Fees: Coefficient Adjustment
 
