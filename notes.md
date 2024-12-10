@@ -15,6 +15,7 @@ Here are some illustrative examples with a stake threshold of 10x:
 Open questions:
 - How do we determine the stake threshold?
 - How do we determine the base fee?
+- Cap on staking? avoid centralization of revenue to 1 prover 
 
 # Base Fees
 Base fee is the minimum payment to a prover for completing a workload. In phase 1 base fees will be paid in $USDC or $SOL and in phase 2 base fees will be paid in $BON.
@@ -33,6 +34,9 @@ For example, if we have a program with:
 
 Then:
 $$f(50000, 0.1) = \frac{50000}{1000} \times 0.1 = 50 \times 0.1 = 5$$
+
+// C_{zkp} - cost of computing 1000 cycles on A40
+C_{zkp} = amoritized cost of A40 * energy consumed per 1000 cycles
 
 
 ## Dynamic Base Fees
