@@ -1,0 +1,89 @@
+# Stake and Claiming Mechanism
+Provers stake $BON to participate proving in the network. The amount of $BON they stake proportionally determines which executuion requests they have access to, as determined by the base fee of the execution request. We call this proportional access the "stake threshold". For example, with a stake threshold of 10x, a prover who stakes 100 $BON tokens can only complete workloads that cost 10 $BON or less.
+
+Since in phase 1, since base fees will be paid in $USDC or $SOL, the stake threshold will be determined by the price of $BON in $USDC or $SOL. For example, with a stake threshold of 10x, a prover who stakes 100 $USDC or $SOL worth of $BON tokens can only complete workloads that cost 10 $USDC or 10 $SOL or less.
+
+Here are some illustrative examples with a stake threshold of 10x:
+| Base Fee | Stake | Ratio (Stake/Base Fee) | Claimable? |
+|----------|--------|----------------------|-------------|
+| $1       | $10    | 10x                  | Yes         |
+| $1       | $100   | 100x                 | Yes         |
+| $100     | $10    | 0.1x                 | No          |
+| $100     | $100   | 1x                   | No          |
+| $10      | $101   | 10.01x               | Yes         |
+
+Open questions:
+- How do we determine the stake threshold?
+- How do we determine the base fee?
+
+# Base Fees
+Base fee is the minimum payment to a prover for completing a workload. In phase 1 base fees will be paid in $USDC or $SOL and in phase 2 base fees will be paid in $BON.
+
+Base fees are determined by the cost of the workload. The base fee F_b is a function of the complexity of the program to be proven C_p and the cost of computing the proof C_c.
+
+F_b = f(C_p, C_c) where C_p is the cost of the program to be proven and C_c is the cost of computing the proof. To start, this function will be a simple linear function of the cost of the program to be proven. 
+
+f(C_p, C_c) = C_p x C_c
+
+## Dynamic Base Fees
+In the future, we may need to change the way the base fee is calculated. For example, under higher demand, we may want to increase the base fee to attract more demand. In such a case, we can formualate a new equation for the base fee as a polynomial function f(C_p, C_c) = a₁(C_p × C_c) + a₂(C_p² × C_c²) + a₃(C_p³ × C_c³)
+
+Example Scenarios:
+
+1. Low Demand (Nearly Linear)
+   a₁ = 1.0
+   a₂ = 0.001
+   a₃ = 0.0001
+   → Keeps fees close to the original linear model to attract more requests
+
+2. Normal Market Conditions
+   a₁ = 1.0
+   a₂ = 0.01
+   a₃ = 0.001
+   → Moderate scaling for complex computations
+
+3. High Demand
+   a₁ = 1.0
+   a₂ = 0.1
+   a₃ = 0.01
+   → Significantly higher fees for complex computations
+
+4. Extreme Demand
+   a₁ = 1.0
+   a₂ = 0.5
+   a₃ = 0.1
+   → Very aggressive scaling for complex computations
+
+Sample Calculation (for C_p = 10, C_c = 10):
+Low Demand:    100 + 1 + 1     = 102
+Normal:        100 + 10 + 10    = 120
+High Demand:   100 + 100 + 100  = 300
+Extreme:       100 + 500 + 1000 = 1600
+
+## Dynamic Base Fees: Coefficient Adjustment
+
+The coefficients (a₁, a₂, a₃) could be automatically adjusted based on network metrics:
+
+1. Network Utilization Rate (U)
+   - U = active_provers / total_provers
+   - Or: U = current_requests / max_throughput
+   - Example: If U > 80%, increase coefficients
+   - If U < 40%, decrease coefficients
+
+2. Queue Length (Q)
+   - Q = pending_requests / average_processing_rate
+   - Longer queues → higher coefficients
+   - Short/no queues → lower coefficients
+
+3. Moving Average Formula
+   For each coefficient aᵢ:
+   aᵢ_new = aᵢ_current × (1 + α × (U - target_utilization))
+   where:
+   - α is a dampening factor (e.g., 0.1)
+   - target_utilization is desired network load (e.g., 70%)
+
+# Slashing 
+When a prover is selected to complete a workload, they are required to complete the workload within a certain amount of time. If they do not complete the workload within the required time, they lose a portion of their stake (i.e. they are slashed). 
+
+- How much is slashed?
+- How long is the timeout?
