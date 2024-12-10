@@ -19,7 +19,7 @@ Open questions:
 # Base Fees
 Base fee is the minimum payment to a prover for completing a workload. In phase 1 base fees will be paid in $USDC or $SOL and in phase 2 base fees will be paid in $BON.
 
-Base fees are determined by the cost of the workload. The base fee $F_b$ is a function of the complexity of the program to be proven $C_p$ and the cost of computing the proof $C_c$.
+Base fees are determined by the cost of the workload. The base fee $F_b$ can be calculated by:
 
 $$F_b = f(C_p, C_c)$$
 
