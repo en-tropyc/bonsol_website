@@ -56,8 +56,8 @@ The coefficients $(a_1, a_2, a_3)$ could be automatically adjusted based on netw
 1. Network Utilization Rate $(U)$
    - $U = \frac{\text{active provers}}{\text{total provers}}$
    - Or: $U = \frac{\text{current requests}}{\text{max throughput}}$
-   - Example: If $U > 80\%$, increase coefficients
-   - If $U < 40\%$, decrease coefficients
+   - Example: If $U > 80$%, increase coefficients
+   - If $U < 40$%, decrease coefficients
 
 2. Queue Length $(Q)$
    - $Q = \frac{\text{pending requests}}{\text{average processing rate}}$
