@@ -19,14 +19,18 @@ Open questions:
 # Base Fees
 Base fee is the minimum payment to a prover for completing a workload. In phase 1 base fees will be paid in $USDC or $SOL and in phase 2 base fees will be paid in $BON.
 
-Base fees are determined by the cost of the workload. The base fee F_b is a function of the complexity of the program to be proven C_p and the cost of computing the proof C_c.
+Base fees are determined by the cost of the workload. The base fee $F_b$ is a function of the complexity of the program to be proven $C_p$ and the cost of computing the proof $C_c$.
 
-F_b = f(C_p, C_c) where C_p is the cost of the program to be proven and C_c is the cost of computing the proof. To start, this function will be a simple linear function of the cost of the program to be proven. 
+$$F_b = f(C_p, C_c)$$
 
-f(C_p, C_c) = C_p x C_c
+where $C_p$ is the cost of the program to be proven and $C_c$ is the cost of computing the proof. To start, this function will be a simple linear function of the cost of the program to be proven. 
+
+$$f(C_p, C_c) = C_p \times C_c$$
 
 ## Dynamic Base Fees
-In the future, we may need to change the way the base fee is calculated. For example, under higher demand, we may want to increase the base fee to attract more demand. In such a case, we can formualate a new equation for the base fee as a polynomial function f(C_p, C_c) = a₁(C_p × C_c) + a₂(C_p² × C_c²) + a₃(C_p³ × C_c³)
+In the future, we may need to change the way the base fee is calculated. For example, under higher demand, we may want to increase the base fee to attract more demand. In such a case, we can formulate a new equation for the base fee as a polynomial function:
+
+$$f(C_p, C_c) = a_1(C_p \times C_c) + a_2(C_p^2 \times C_c^2) + a_3(C_p^3 \times C_c^3)$$
 
 Example Scenarios:
 
@@ -47,25 +51,25 @@ Sample Calculation (for C_p = 10, C_c = 10):
 
 ## Dynamic Base Fees: Coefficient Adjustment
 
-The coefficients (a₁, a₂, a₃) could be automatically adjusted based on network metrics:
+The coefficients $(a_1, a_2, a_3)$ could be automatically adjusted based on network metrics:
 
-1. Network Utilization Rate (U)
-   - U = active_provers / total_provers
-   - Or: U = current_requests / max_throughput
-   - Example: If U > 80%, increase coefficients
-   - If U < 40%, decrease coefficients
+1. Network Utilization Rate $(U)$
+   - $U = \frac{\text{active\_provers}}{\text{total\_provers}}$
+   - Or: $U = \frac{\text{current\_requests}}{\text{max\_throughput}}$
+   - Example: If $U > 80\%$, increase coefficients
+   - If $U < 40\%$, decrease coefficients
 
-2. Queue Length (Q)
-   - Q = pending_requests / average_processing_rate
+2. Queue Length $(Q)$
+   - $Q = \frac{\text{pending\_requests}}{\text{average\_processing\_rate}}$
    - Longer queues → higher coefficients
    - Short/no queues → lower coefficients
 
 3. Moving Average Formula
-   For each coefficient aᵢ:
-   aᵢ_new = aᵢ_current × (1 + α × (U - target_utilization))
+   For each coefficient $a_i$:
+   $$a_i^{new} = a_i^{current} \times (1 + \alpha \times (U - U_{target}))$$
    where:
-   - α is a dampening factor (e.g., 0.1)
-   - target_utilization is desired network load (e.g., 70%)
+   - $\alpha$ is a dampening factor (e.g., 0.1)
+   - $U_{target}$ is desired network load (e.g., 70%)
 
 # Slashing 
 When a prover is selected to complete a workload, they are required to complete the workload within a certain amount of time. If they do not complete the workload within the required time, they lose a portion of their stake (i.e. they are slashed). 
