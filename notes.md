@@ -32,8 +32,7 @@ For example, if we have a program with:
 - $C_{zkp}$ = \$0.1$ per 1000 cycles
 
 Then:
-$$f(50000, 0.1) = \frac{50000}{1000} \times 0.1 = 50 \times 0.1 = \$5$$
-
+$$f(50000, 0.1) = \frac{50000}{1000} \times 0.1 = 50 \times 0.1 = 5$$
 
 
 ## Dynamic Base Fees
