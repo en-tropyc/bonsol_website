@@ -62,6 +62,8 @@ Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
 | High         | 100 + 100 + 100    | 300   |
 | Extreme      | 100 + 500 + 1000   | 1600  |
 
+$$f(ZKP_s, C_{zkp}) = a_1(ZKP_s \times C_{zkp}) + a_2((\frac{ZKP_s}{1000})^2 \times C_{zkp}^2) + a_3(ZKP_s^3 \times C_{zkp}^3)$$
+
 (correct math)
 Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
 | Demand Level | Calculation         | Total |
