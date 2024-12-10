@@ -30,35 +30,20 @@ In the future, we may need to change the way the base fee is calculated. For exa
 
 Example Scenarios:
 
-1. Low Demand (Nearly Linear)
-   a₁ = 1.0
-   a₂ = 0.001
-   a₃ = 0.0001
-   → Keeps fees close to the original linear model to attract more requests
-
-2. Normal Market Conditions
-   a₁ = 1.0
-   a₂ = 0.01
-   a₃ = 0.001
-   → Moderate scaling for complex computations
-
-3. High Demand
-   a₁ = 1.0
-   a₂ = 0.1
-   a₃ = 0.01
-   → Significantly higher fees for complex computations
-
-4. Extreme Demand
-   a₁ = 1.0
-   a₂ = 0.5
-   a₃ = 0.1
-   → Very aggressive scaling for complex computations
+| Demand Level | a₁  | a₂    | a₃     | Description |
+|-------------|-----|-------|---------|-------------|
+| Low         | 1.0 | 0.001 | 0.0001  | Keeps fees close to the original linear model to attract more requests |
+| Normal      | 1.0 | 0.01  | 0.001   | Moderate scaling for complex computations |
+| High        | 1.0 | 0.1   | 0.01    | Significantly higher fees for complex computations |
+| Extreme     | 1.0 | 0.5   | 0.1     | Very aggressive scaling for complex computations |
 
 Sample Calculation (for C_p = 10, C_c = 10):
-Low Demand:    100 + 1 + 1     = 102
-Normal:        100 + 10 + 10    = 120
-High Demand:   100 + 100 + 100  = 300
-Extreme:       100 + 500 + 1000 = 1600
+| Demand Level | Calculation         | Total |
+|--------------|---------------------|-------|
+| Low          | 100 + 1 + 1        | 102   |
+| Normal       | 100 + 10 + 10      | 120   |
+| High         | 100 + 100 + 100    | 300   |
+| Extreme      | 100 + 500 + 1000   | 1600  |
 
 ## Dynamic Base Fees: Coefficient Adjustment
 
