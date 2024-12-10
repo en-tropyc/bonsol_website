@@ -29,10 +29,10 @@ $$f(ZKP_s, C_zkp) = \frac{ZKP_s}{1000} \times C_zkp$$
 
 For example, if we have a program with:
 - $ZKP_s = 50,000$ cycles
-- $C_zkp = \$2$ per 1000 cycles
+- $C_zkp = \$0.1$ per 1000 cycles
 
 Then:
-$$f(50000, 2) = \frac{50000}{1000} \times 2 = 50 \times 2 = \$100$$
+$$f(50000, 0.1) = \frac{50000}{1000} \times 0.1 = 50 \times 0.1 = \$5$$
 
 
 
