@@ -21,15 +21,15 @@ Base fee is the minimum payment to a prover for completing a workload. In phase 
 
 Base fees are determined by the cost of the workload. The base fee $F_b$ can be calculated by:
 
-$$F_b = f(ZKP_s, C_zkp)$$
+$$F_b = f(ZKP_s, C_{zkp})$$
 
-where $ZKP_s$ is the size of the program to be proven and $C_zkp$ is the cost of computing 1000 cycles of the program. To start, this function will be a simple linear function:
+where $ZKP_s$ is the size of the program to be proven and $C_{zkp}$ is the cost of computing 1000 cycles of the program. To start, this function will be a simple linear function:
 
-$$f(ZKP_s, C_zkp) = \frac{ZKP_s}{1000} \times C_zkp$$
+$$f(ZKP_s, C_{zkp}) = \frac{ZKP_s}{1000} \times C_{zkp}$$
 
 For example, if we have a program with:
 - $ZKP_s = 50,000$ cycles
-- $C_zkp = \$0.1$ per 1000 cycles
+- $C_{zkp}$ = \$0.1$ per 1000 cycles
 
 Then:
 $$f(50000, 0.1) = \frac{50000}{1000} \times 0.1 = 50 \times 0.1 = \$5$$
@@ -39,7 +39,7 @@ $$f(50000, 0.1) = \frac{50000}{1000} \times 0.1 = 50 \times 0.1 = \$5$$
 ## Dynamic Base Fees
 In the future, we may need to change the way the base fee is calculated. For example, under higher demand, we may want to increase the base fee to attract more demand. In such a case, we can formulate a new equation for the base fee as a polynomial function:
 
-$$f(ZKP_s, C_zkp) = a_1(ZKP_s \times C_zkp) + a_2(ZKP_s^2 \times C_zkp^2) + a_3(ZKP_s^3 \times C_zkp^3)$$
+$$f(ZKP_s, C_{zkp}) = a_1(ZKP_s \times C_{zkp}) + a_2(ZKP_s^2 \times C_{zkp}^2) + a_3(ZKP_s^3 \times C_{zkp}^3)$$
 
 Example Scenarios:
 
@@ -50,7 +50,7 @@ Example Scenarios:
 | High        | 1.0 | 0.1   | 0.01    | Significantly higher fees for complex computations |
 | Extreme     | 1.0 | 0.5   | 0.1     | Very aggressive scaling for complex computations |
 
-Sample Calculation (for ZKP_s = 10, C_zkp = 10):
+Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
 | Demand Level | Calculation         | Total |
 |--------------|---------------------|-------|
 | Low          | 100 + 1 + 1        | 102   |
