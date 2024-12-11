@@ -40,7 +40,7 @@ Note: Cost of computing cycles should be benchmarked on the minimum spec hardwar
 ## Dynamic Base Fees
 In the future, we may need to change the way the base fee is calculated. For example, under higher demand, we may want to increase the base fee to attract more demand. In such a case, we can formulate a new equation for the base fee as a polynomial function:
 
-$$f(ZKP_s, C_{zkp}) = a_1(\frac{ZKP_s}{1000} \times C_{zkp}) + a_2(\frac{ZKP_s}{1000})^2 \times C_{zkp}^2 + a_3(\frac{ZKP_s}{1000})^3 \times C_{zkp}^3$$
+$$f(ZKP_s, C_{zkp}) = a_1(\frac{ZKP_s}{100000} \times C_{zkp}) + a_2(\frac{ZKP_s}{100000})^2 \times C_{zkp}^2 + a_3(\frac{ZKP_s}{100000})^3 \times C_{zkp}^3$$
 
 Example Scenarios:
 
@@ -51,13 +51,13 @@ Example Scenarios:
 | High        | 1.0 | 0.1   | 0.01    | Significantly higher fees for complex computations |
 | Extreme     | 1.0 | 0.5   | 0.1     | Very aggressive scaling for complex computations |
 
-Sample Calculation (for ZKP_s = 50000, C_{zkp} = 0.1):
+Sample calculation for ZKP_s = 500000, C_{zkp} = 0.1:
 | Demand Level | Calculation                | Total |
 |--------------|----------------------------|-------|
-| Low          | 5.00 + 0.025 + 0.00125    | 5.03  |
-| Normal       | 5.00 + 0.25 + 0.0125      | 5.26  |
-| High         | 5.00 + 2.50 + 0.125       | 7.63  |
-| Extreme      | 5.00 + 12.50 + 1.25       | 18.75 |
+| Low          | 0.5 + 0.00125 + 0.000125  | 0.50  |
+| Normal       | 0.5 + 0.0125 + 0.00125    | 0.51  |
+| High         | 0.5 + 0.125 + 0.0125      | 0.64  |
+| Extreme      | 0.5 + 0.625 + 0.125       | 1.25  |
 
 ## Dynamic Base Fees: Coefficient Adjustment
 
