@@ -24,25 +24,23 @@ Base fees are determined by the cost of the workload. The base fee $F_b$ can be 
 
 $$F_b = f(ZKP_s, C_{zkp})$$
 
-where $ZKP_s$ is the size of the program to be proven and $C_{zkp}$ is the cost of computing 1000 cycles of the program. To start, this function will be a simple linear function:
+where $ZKP_s$ is the size of the program to be proven and $C_{zkp}$ is the cost of computing 100,000 cycles of any a program. To start, this function will be a simple linear function:
 
-$$f(ZKP_s, C_{zkp}) = \frac{ZKP_s}{1000} \times C_{zkp}$$
+$$f(ZKP_s, C_{zkp}) = \frac{ZKP_s}{100000} \times C_{zkp}$$
 
 For example, if we have a program with:
-- $ZKP_s = 50,000$ cycles
-- $C_{zkp}$ = \$0.1$ per 1000 cycles
+- $ZKP_s = 500,000$ cycles
+- $C_{zkp}$ = \$0.1$ per 100,000 cycles
 
 Then:
-$$f(50000, 0.1) = \frac{50000}{1000} \times 0.1 = 50 \times 0.1 = 5$$
+$$f(500000, 0.1) = \frac{500000}{100000} \times 0.1 = 50 \times 0.1 = 0.5\$$
 
-// C_{zkp} - cost of computing 1000 cycles on A40
-C_{zkp} = amoritized cost of A40 * energy consumed per 1000 cycles
-
+Note: Cost of computing cycles should be benchmarked on the minimum spec hardware of the prover network
 
 ## Dynamic Base Fees
 In the future, we may need to change the way the base fee is calculated. For example, under higher demand, we may want to increase the base fee to attract more demand. In such a case, we can formulate a new equation for the base fee as a polynomial function:
 
-$$f(ZKP_s, C_{zkp}) = a_1(ZKP_s \times C_{zkp}) + a_2(ZKP_s^2 \times C_{zkp}^2) + a_3(ZKP_s^3 \times C_{zkp}^3)$$
+$$f(ZKP_s, C_{zkp}) = a_1(\frac{ZKP_s}{1000} \times C_{zkp}) + a_2(\frac{ZKP_s}{1000})^2 \times C_{zkp}^2 + a_3(\frac{ZKP_s}{1000})^3 \times C_{zkp}^3$$
 
 Example Scenarios:
 
@@ -53,25 +51,13 @@ Example Scenarios:
 | High        | 1.0 | 0.1   | 0.01    | Significantly higher fees for complex computations |
 | Extreme     | 1.0 | 0.5   | 0.1     | Very aggressive scaling for complex computations |
 
-(wrong math below)
-Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
-| Demand Level | Calculation         | Total |
-|--------------|---------------------|-------|
-| Low          | 100 + 1 + 1        | 102   |
-| Normal       | 100 + 10 + 10      | 120   |
-| High         | 100 + 100 + 100    | 300   |
-| Extreme      | 100 + 500 + 1000   | 1600  |
-
-$$f(ZKP_s, C_{zkp}) = a_1(ZKP_s \times C_{zkp}) + a_2((\frac{ZKP_s}{1000})^2 \times C_{zkp}^2) + a_3(ZKP_s^3 \times C_{zkp}^3)$$
-
-(correct math)
-Sample Calculation (for ZKP_s = 10, C_{zkp} = 10):
-| Demand Level | Calculation         | Total |
-|--------------|---------------------|-------|
-| Low          | 100 + 10 + 1        | 111   |
-| Normal       | 100 + 100 + 10      | 210   |
-| High         | 100 + 1000 + 100    | 1200   |
-| Extreme      | 100 + 5000 + 1000   | 6100  |
+Sample Calculation (for ZKP_s = 50000, C_{zkp} = 0.1):
+| Demand Level | Calculation                | Total |
+|--------------|----------------------------|-------|
+| Low          | 5.00 + 0.025 + 0.00125    | 5.03  |
+| Normal       | 5.00 + 0.25 + 0.0125      | 5.26  |
+| High         | 5.00 + 2.50 + 0.125       | 7.63  |
+| Extreme      | 5.00 + 12.50 + 1.25       | 18.75 |
 
 ## Dynamic Base Fees: Coefficient Adjustment
 
