@@ -54,6 +54,38 @@
         .nav a.active {
             text-decoration: underline;
         }
+
+        .tech-stack-container {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            margin: 1rem 0;
+        }
+
+        .tech-stack-image {
+            flex: 0 0 480px; /* This maintains the image width you specified */
+        }
+
+        .tech-stack-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .tech-stack-text {
+            flex: 1;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .tech-stack-container {
+                flex-direction: column;
+            }
+            
+            .tech-stack-image {
+                flex: 0 0 auto;
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -61,7 +93,7 @@
         <nav class="nav">
             <a href="#home">Home</a>
             <a href="about.html">About</a>
-            <a href="bonsolCollective.html" class="active">Bonsol Collective</a>
+            <a href="bonsol.html" class="active">Bonsol Collective</a>
             <a href="token.html">$BON</a>
             <a href="https://bonsol.sh/" target="_blank">Docs</a>
             <a href="https://x.com/Bonsolsh" target="_blank">X</a>
@@ -80,22 +112,27 @@
 
                 <div class="section">
                     <h3>Tech Stack of Bonsol Network</h3>
-                    <img src="Bonsol-TechStack.png" alt="Bonsol Tech Stack" style="width:480px">
-                    
-                    <p><strong>Application Layer:</strong> Gaming, AI agents, DeFi, DePIN, Energy, etc.</p>
-                    
-                    <p><strong>Foundational Layers of Bonsol Tech Stack:</strong></p>
-                    <ul>
-                        <li>Proving Systems</li>
-                        <li>Proof Generation
+                    <div class="tech-stack-container">
+                        <div class="tech-stack-image">
+                            <img src="Bonsol-TechStack.png" alt="Bonsol Tech Stack">
+                        </div>
+                        <div class="tech-stack-text">
+                            <p><strong>Application Layer:</strong> Gaming, AI agents, DeFi, DePIN, Energy, etc.</p>
+                            
+                            <p><strong>Foundational Layers of Bonsol Tech Stack:</strong></p>
                             <ul>
-                                <li>Market Design</li>
-                                <li>Prover Nodes</li>
+                                <li>Proving Systems</li>
+                                <li>Proof Generation
+                                    <ul>
+                                        <li>Market Design</li>
+                                        <li>Prover Nodes</li>
+                                    </ul>
+                                </li>
+                                <li>Proof Verification and Settlement</li>
+                                <li>ZK Specialized Hardware</li>
                             </ul>
-                        </li>
-                        <li>Proof Verification and Settlement</li>
-                        <li>ZK Specialized Hardware</li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="section">
@@ -116,8 +153,8 @@
 
                 <div class="section">
                     <h3>Benefits</h3>
-                    <p>For Apps - Distribution, eventual token incentives</p>
-                    <p>For Network Contributors - Inclusion to Core Contributors and eventual token incentives</p>
+                    <p>For Apps: Distribution, eventual token incentives</p>
+                    <p>For Network Contributors: Inclusion to Core Contributors and eventual token incentives</p>
                     
                     <p>We recognize there is no single best solution for network designs and there will be an ever evolving process to maintain and improve the core components of Bonsol - which is why the Bonsol Collective will also act as a funnel towards the <strong>Core Contributors:</strong> a small curated working group for active members with niche expertise in verifiable compute, who participate in key design decisions and core contributions to the open development of the Bonsol network. <strong>(this will be incentivized via RPGF or other mechanisms)</strong></p>
                 </div>
