@@ -45,10 +45,24 @@
 
         pre {
             background: #fff;
-            /* padding: 1rem;
-            margin: 1rem 0; */
-            /* overflow-x: auto; */
+            padding: 0;
+            overflow-x: auto;
+            margin: 0;
+            text-align: left;
+            margin-right: 300px;  /* Same alignment as token.html */
         }
+
+        .logo {
+            max-width: 300px; /* adjust this value as needed */
+            height: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .content + .content {  /* Targets any .content div that follows another .content div */
+            margin-top: 2rem;
+        }
+
     </style>
 </head>
 <body>
@@ -57,24 +71,27 @@
             <a href="index.html">Home</a>
             <a href="about.html" class="active">About</a>
             <a href="token.html">$BON</a>
-            <a href="https://bonsol.sh/" target="_blank">Docs</a>
-            <a href="https://x.com/Bonsolsh" target="_blank">X</a>
+            <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
+            <a href="https://x.com/bonsol_labs" target="_blank">X</a>
         </nav>
 
-        <h1>乃ㄖ几丂ㄖㄥ</h1>
-
+        <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
         <pre>
-            Verifiable compute for Solana.
+Verifiable compute for Solana
         </pre>
+
+
     </div>
 
     <div class="content">
+        <h1>What is Bonsol?</h1>
+
         <p>Verifiable Compute ("VC") is a cryptographic technique that centers on running a specific workload in a way that produces an attestation of its workings which can be publicly verified without running the computation again. In practice, VC utilizes different cryptographic primitives to ensure computational integrity. Ultimately, this enables external parties to run computations on behalf of a user while ensuring the validity of the computation's inputs, outputs, and methods. The cost benefits and efficiencies of this approach are massive at scale.</p>
 
         <p>Bonsol is a public good for enabling VC on Solana by providing:</p>
         <ul>
-            <li>A marketplace for producing and consuming proofs</li>
             <li>Libraries and SDKs for easy application integration</li>
+            <li>A marketplace for producing and consuming proofs</li>
             <li>Economic incentives that align the entire network</li>
         </ul>
 
