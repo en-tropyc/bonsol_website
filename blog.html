@@ -74,36 +74,97 @@
                 transparent 20px
             );
         }
+
+        /* Add new blog-specific styles */
+        .blog-section {
+            margin: 2rem 0;
+        }
+
+        .featured-post {
+            border-left: 3px solid #333;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .post-card {
+            border: 1px solid #eee;
+            padding: 1.5rem;
+        }
     </style>
 </head>
 <body>
     <div class="content">
         <nav class="nav">
-            <a href="index.html" class="active">Home</a>
+            <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="token.html">$BON</a>
             <a href="collective.html">Bonsol Collective</a>
-            <a href="blog.html">Blog</a>
+            <a href="blog.html" class="active">Blog</a>
             <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
             <a href="https://x.com/bonsol_labs" target="_blank">X</a>
         </nav>
 
         <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
         <pre>
-Solana is evolving into a ZK-powered L1
+Learn about the latest developments in Bonsol
         </pre>
         <hr>
 
-        <h1>Introduction</h1>
-        <p>Solana stands out as a highly capable Layer 1 (L1) blockchain, especially for those looking to develop zero-knowledge (ZK) applications.</p>
+        <div class="blog-section">
+            <h2>Featured Post</h2>
+            <div class="featured-post">
+                <div class="post-title">Building the Future of Solana with Bonsol</div>
+                <div class="post-description">Exploring how Bonsol is revolutionizing the Solana ecosystem through innovative solutions and community-driven development.</div>
+                <a href="Bonsol-Blog1.html" class="read-more">Read More</a>
+            </div>
+        </div>
 
-        <p>A key aspect of Solana's suitability for ZK applications is its runtime support for elliptic curve operations. Elliptic curve cryptography (ECC) is a cornerstone in the construction of ZK proofs, which enable one party to prove the truth of a statement to another party without revealing any underlying data. Solana's native support for these operations significantly simplifies the development process, allowing for more efficient and secure implementation of ZK proofs.</p>
+        <hr>
 
-        <p>Another major advantage of Solana is its low fee compute and transaction model. In the blockchain world, transaction costs can be a substantial hurdle, affecting scalability and user adoption. Solana addresses this challenge with its high-throughput consensus mechanism, which facilitates fast and cost-effective transactions. This efficiency is particularly interesting when compounded with ZK, offering a pathway towards ultra-low latency applications with completely new privacy and security guarantees.</p>
-
-        <p>Moreover, Solana offers innovative solutions for managing state in ZK applications. In instances where applications cannot fully utilize Solana's new syscalls for curves, the platform's low transaction costs come to the rescue. Developers can leverage these low costs to process verifier computations over state efficiently. This approach allows for the recording of necessary data and the subsequent removal of excess state, optimizing the application's performance and resource usage.</p>
-
-        <p>In summary, Solana presents a compelling combination of technical capabilities for ZK application development. Its support for elliptic curve operations, coupled with a low-cost transaction model, makes it an attractive platform for developers looking to explore the frontiers of privacy and verifiable computation. The platform's features speak for themselves, positioning it as a leading choice for building sophisticated and efficient ZK applications.</p>
+        <div class="blog-section">
+            <h2>All Posts</h2>
+            <div class="post-grid">
+                <div class="post-card">
+                    <div class="post-title">Introducing Bonsol Labs</div>
+                    <div class="post-description">The journey begins: Learn about our mission and vision for the Solana ecosystem.</div>
+                    <a href="#" class="read-more">Coming Soon</a>
+                </div>
+                <div class="post-card">
+                    <div class="post-title">$BON Token Launch</div>
+                    <div class="post-description">Everything you need to know about the $BON token and its utility.</div>
+                    <a href="#" class="read-more">Coming Soon</a>
+                </div>
+                <!-- Add more post cards as needed -->
+            </div>
+        </div>
     </div>
 </body>
 </html>

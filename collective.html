@@ -63,17 +63,17 @@
             margin-top: 2rem;
             margin-bottom: 2rem;
         }
-
+        /* Horizontal line styling */
         hr {
-        border: none;
-        height: 1px;
-        margin: 2rem 0;
-        background: repeating-linear-gradient(90deg,
-        #333,
-        #333 10px,
-        transparent 10px,
-        transparent 20px
-        );
+            border: none;
+            height: 1px;
+            margin: 2rem 0;
+            background: repeating-linear-gradient(90deg,
+                #333,
+                #333 10px,
+                transparent 10px,
+                transparent 20px
+            );
         }
 
         .logo-grid {
@@ -90,12 +90,48 @@
             align-items: center;
             justify-content: center;
             height: 100px;
+            cursor: pointer;
         }
 
         .logo-item img {
             max-width: 400px;
             height: auto;
             max-height: 100px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
         }
 
     </style>
@@ -107,13 +143,14 @@
             <a href="about.html">About</a>
             <a href="token.html">$BON</a>
             <a href="collective.html" class="active">Bonsol Collective</a>
+            <a href="blog.html">Blog</a>
             <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
             <a href="https://x.com/bonsol_labs" target="_blank">X</a>
         </nav>
 
         <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
         <pre>
-Our community of partners 
+Learn about our community of partners 
         </pre>
         <hr>
 
@@ -124,7 +161,7 @@ Our community of partners
         
 
         <section id="logos">
-            <h2>Co-Founders</h2>
+            <h2>Co-Founders:</h2>
             <div class="logo-grid">
                 <!-- Anagram  --> 
                 <div class="logo-item">
@@ -141,23 +178,43 @@ Our community of partners
                 <!-- Add more logos as needed -->
 
             </div>
-            <h2>Collective Members</h2>
+            <h2>Collective Members:</h2>
             <div class="logo-grid">
                 <!-- Everstake  --> 
-                <div class="logo-item" style="margin-top: 18px;">
+                <div class="logo-item" 
+                     data-title="Everstake" 
+                     data-description="Everstake is contributing to the Bonsol network by...">
                     <a href="https://everstake.one/" target="_blank">
                         <img src="images/everstake-Logo.png" alt="Everstake Logo" title="Everstake">
                     </a>
                 </div>
                 <!-- Fermah  --> 
-                <div class="logo-item" style="margin-top: 18px;">
+                <div class="logo-item" 
+                     data-title="Fermah" 
+                     data-description="Fermah is working on...">
                     <a href="https://www.fermah.xyz/" target="_blank">
                         <img src="images/fermah-Logo.png" alt="Fermah Logo" title="Fermah">
                     </a>
                 </div>
                 <!-- Add more logos as needed -->
                 <!-- Darklake.fi  --> 
-                <div class="logo-item" style="margin-top: 18px;">
+                <div class="logo-item" 
+                     data-title="Darklake" 
+                     data-description="Darklake is excited to join the Bonsol Collective as a vanguard partner determined to liberate DeFi from its current constraints.
+                     
+                     As builders of Solana's smoothest settlement engine, we're uniquely positioned to leverage Bonsol's zk-prover network and off-chain compute framework to create next-generation privacy-preserving financial applications.
+                     
+                     What We're Exploring Together
+                     
+                     * Async DeFi Primitives: Designing privacy-preserving trading mechanisms so users' rights to fair execution cannot be violated.
+                     
+                     * Proof of Liquidity Systems: Establishing uncompromising verification systems that demand integrity while defending privacy.
+                     
+                     * ZK-Enhanced Infrastructure: Contributing specialized knowledge to the distributed prover network while implementing novel use cases for verifiable compute functions
+                     
+                     Our team brings deep expertise in zero-knowledge implementation, market structure, and Solana-native development. 
+                     
+                     We're committed to helping Bonsol usher Solana into its next era of growth by building privacy-first infrastructure at scale.">
                     <a href="https://darklake.fi/" target="_blank">
                         <img src="images/darklake-Logo.png" alt="Darklake Logo" title="Darklake">
                     </a>
@@ -190,5 +247,55 @@ Our community of partners
         </section>
 
     </div>
+
+    <!-- Add this right before closing body tag -->
+    <div id="logoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <!-- Add this before closing body tag -->
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('logoModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Add click handlers to all logo items
+        document.querySelectorAll('.logo-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                // Prevent the link from opening if clicking the logo
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Get data from the logo item
+                    const title = item.getAttribute('data-title');
+                    const description = item.getAttribute('data-description');
+                    
+                    // Update and show modal
+                    modalTitle.textContent = title;
+                    modalDescription.textContent = description;
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // Close modal when clicking X
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

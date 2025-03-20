@@ -63,6 +63,18 @@
         .content + .content {  /* Targets any .content div that follows another .content div */
             margin-top: 2rem;
         }
+        /* Horizontal line styling */
+        hr {
+            border: none;
+            height: 1px;
+            margin: 2rem 0;
+            background: repeating-linear-gradient(90deg,
+                #333,
+                #333 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
 
     </style>
 </head>
@@ -73,6 +85,7 @@
             <a href="about.html" class="active">About</a>
             <a href="token.html">$BON</a>
             <a href="collective.html">Bonsol Collective</a>
+            <a href="blog.html">Blog</a>
             <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
             <a href="https://x.com/bonsol_labs" target="_blank">X</a>
         </nav>
@@ -81,7 +94,7 @@
         <pre>
 Verifiable compute for Solana
         </pre>
-
+        <hr>
 
     </div>
 
