@@ -56,13 +56,6 @@
             text-align: left;
             margin-right: 300px;  /* Same alignment as token.html */
         }
-
-        .logo {
-            max-width: 300px; /* adjust this value as needed */
-            height: auto;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
         /* Horizontal line styling */
         hr {
             border: none;
@@ -74,6 +67,20 @@
                 transparent 10px,
                 transparent 20px
             );
+        }
+
+        .solid-hr {
+            border: none;
+            height: 1px;
+            background-color: #333;
+            margin: 0rem 0;
+        }
+        /* logo grid & logo item styling */
+        .logo {
+            max-width: 300px; /* adjust this value as needed */
+            height: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
         .logo-grid {
@@ -147,17 +154,15 @@
             <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
             <a href="https://x.com/bonsol_labs" target="_blank">X</a>
         </nav>
-
+        <hr class="solid-hr">
         <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
         <pre>
 Learn about our community of partners 
         </pre>
-        <hr>
 
-
-        <h2>Bonsol Collective</h2>
+        <h1>Bonsol Collective</h1>
         <p>The Bonsol Collective is a group of individuals & entities who are passionate about the future of verifiable compute and dedicated to supporting the development of the Bonsol ecosystem on Solana.</p>
-        <p>If you are interested in joining the Bonsol Collective, please reach out to us on <a href="https://x.com/Bonsolsh" target="_blank">X</a>.</p>
+        <p>If you are interested in joining the Bonsol Collective, please reach out to us on <a href="https://x.com/bonsol_labs" target="_blank">X</a>.</p>
         
 
         <section id="logos">
@@ -170,20 +175,21 @@ Learn about our community of partners
                     </a>
                 </div>
                 <!-- Zero Computing  --> 
-                <div class="logo-item">
+                <div class="logo-item" 
+                     data-title="Zero Computing" 
+                     data-description="Zero Computing began as a specialized zero-knowledge prover. Much as Bitcoin miners and Ethereum validators saw early success in processing blocks, Zero Computing is capturing the surge of blocks produced by zk proofs. We are also co-founders of Bonsol, a new Solana native Verifiable Compute framework. This platform includes developer toolkits and a decentralized prover network to support the next generation of Solana applications and enable powerful use cases of off-chain compute.">
                     <a href="https://zerocomputing.com" target="_blank">
                         <img src="images/ZeroLogo.png" alt="Zero Computing Logo" title="Zero Computing">
                     </a>
                 </div>
-                <!-- Add more logos as needed -->
-
             </div>
+
             <h2>Collective Members:</h2>
             <div class="logo-grid">
                 <!-- Everstake  --> 
                 <div class="logo-item" 
                      data-title="Everstake" 
-                     data-description="Everstake is contributing to the Bonsol network by...">
+                     data-description="Everstake is the leading institutional-grade staking infrastructure and services provider, trusted by over 735,000 users with $6.5 billion in staked assets. Its high-performance servers, broadband channels, and advanced network topology ensure our 99.9% uptime across supported networks. With six years of experience and operations on 85 blockchains, Everstake offers reliable and diverse staking solutions for both institutional investors and everyday crypto holders.">
                     <a href="https://everstake.one/" target="_blank">
                         <img src="images/everstake-Logo.png" alt="Everstake Logo" title="Everstake">
                     </a>
@@ -200,38 +206,32 @@ Learn about our community of partners
                 <!-- Darklake.fi  --> 
                 <div class="logo-item" 
                      data-title="Darklake" 
-                     data-description="Darklake is excited to join the Bonsol Collective as a vanguard partner determined to liberate DeFi from its current constraints.
-                     
-                     As builders of Solana's smoothest settlement engine, we're uniquely positioned to leverage Bonsol's zk-prover network and off-chain compute framework to create next-generation privacy-preserving financial applications.
-                     
-                     What We're Exploring Together
-                     
-                     * Async DeFi Primitives: Designing privacy-preserving trading mechanisms so users' rights to fair execution cannot be violated.
-                     
-                     * Proof of Liquidity Systems: Establishing uncompromising verification systems that demand integrity while defending privacy.
-                     
-                     * ZK-Enhanced Infrastructure: Contributing specialized knowledge to the distributed prover network while implementing novel use cases for verifiable compute functions
-                     
-                     Our team brings deep expertise in zero-knowledge implementation, market structure, and Solana-native development. 
-                     
-                     We're committed to helping Bonsol usher Solana into its next era of growth by building privacy-first infrastructure at scale.">
+                     data-description="Darklake is excited to join the Bonsol Collective as a vanguard partner determined to liberate DeFi from its current constraints. As builders of Solana's smoothest settlement engine, we're uniquely positioned to leverage Bonsol's zk-prover network and off-chain compute framework to create next-generation privacy-preserving financial applications.">
                     <a href="https://darklake.fi/" target="_blank">
                         <img src="images/darklake-Logo.png" alt="Darklake Logo" title="Darklake">
                     </a>
                 </div>
-                
+
+                <!-- 8 bit oracle  -->
+                <div class="logo-item" style="margin-top: 10px;"
+                     data-title="8bit Oracle" 
+                     data-description="The 8-BIt Oracle is a generative fortune-telling app, based on the I-Ching and can be found at 8bitoracle.ai.
+
+                     On default, you ask a question, and a hexagram is randomly chosen.  We closely mirror the yarrow stalk method in our code, with precisely the same probabilities for drawing each hexagram line.  The hexagram meanings are interpreted by AI, and an inner monologue and response are generated.
+                     
+                     You can switch to Chat Mode so that it is a normal chatbot, but the AI is still primed to respond as a wise sage who is very knowledgeable in the I-Ching.">
+                    <a href="https://8bitoracle.ai/" target="_blank">
+                        <img src="images/8bitoracle-Logo.png" alt="8bit Oracle Logo" title="8bit Oracle">
+                    </a>
+                </div>
+
                 <!-- Rubicon  -->
                 <div class="logo-item" style="margin-top: 18px;">
                     <a href="https://docs.google.com/presentation/d/1WwUSjFy-Sl-J8WjcWjOM99Pku2SUYYxO0bHXeQjiKv8/edit?usp=sharing" target="_blank">
                         <img src="images/mako-Logo.jpg" alt="Mako Logo" title="Mako">
                     </a>
                 </div>
-                <!-- 8 bit oracle  -->
-                <div class="logo-item" style="margin-top: 18px;">
-                    <a href="https://8bitoracle.ai/" target="_blank">
-                        <img src="images/8bitoracle-Logo.png" alt="8bit Oracle Logo" title="8bit Oracle">
-                    </a>
-                </div>
+
                 <!-- Lotus Sutra  -->
                 <div class="logo-item" style="margin-top: 18px;">
                     <a href="https://x.com/AwakenTheLotus" target="_blank">
@@ -296,6 +296,13 @@ Learn about our community of partners
                 modal.style.display = 'none';
             }
         }
+
+        // Add event listener for escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                modal.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>

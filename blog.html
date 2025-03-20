@@ -75,6 +75,13 @@
             );
         }
 
+        .solid-hr {
+            border: none;
+            height: 1px;
+            background-color: #333;
+            margin: 0rem 0;
+        }
+
         /* Add new blog-specific styles */
         .blog-section {
             margin: 2rem 0;
@@ -98,13 +105,19 @@
         }
 
         .read-more {
-            color: #333;
+            color: #fff;  /* White text */
             text-decoration: none;
             font-weight: bold;
+            background-color: #333;  /* Dark background */
+            padding: 0.5rem 1rem;  /* Add some padding */
+            border-radius: 10px;  /* Rounded corners */
+            display: inline-block;  /* Makes padding work properly */
+            transition: background-color 0.2s;  /* Smooth hover effect */
         }
 
         .read-more:hover {
-            text-decoration: underline;
+            background-color: #6d6d6d;  /* Lighter shade on hover */
+            text-decoration: underline dotted;  /* underline on hover */
         }
 
         .post-grid {
@@ -117,6 +130,20 @@
         .post-card {
             border: 1px solid #eee;
             padding: 1.5rem;
+        }
+
+        /* all posts section */
+        .all-posts-section {
+            background-color: #d2d2d2;
+            padding: 2rem;
+            margin: 0rem;  /* Negative margin to extend background to edges */
+        }
+
+        /* Update post-card style to stand out against grey background */
+        .post-card {
+            border: 1px solid #eee;
+            padding: 1.5rem;
+            background-color: #fff;  /* Ensure cards are white */
         }
     </style>
 </head>
@@ -131,36 +158,56 @@
             <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
             <a href="https://x.com/bonsol_labs" target="_blank">X</a>
         </nav>
-
+        <hr class="solid-hr">
         <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
         <pre>
 Learn about the latest developments in Bonsol
         </pre>
-        <hr>
 
+        <!-- Featured Post Section -->
         <div class="blog-section">
             <h2>Featured Post</h2>
             <div class="featured-post">
-                <div class="post-title">Building the Future of Solana with Bonsol</div>
-                <div class="post-description">Exploring how Bonsol is revolutionizing the Solana ecosystem through innovative solutions and community-driven development.</div>
-                <a href="Bonsol-Blog1.html" class="read-more">Read More</a>
+                <div class="post-title">Bonsol: Infinite Compute for Solana</div>
+                <div class="post-description">Explore how Bonsol is revolutionizing the Solana ecosystem through its verifiable computation framework and community-driven development.</div>
+                <a href="blogPosts/bonsol-infinite-compute.html" target="_blank" class="read-more">Read More</a>
             </div>
         </div>
+        <br>
 
-        <hr>
-
-        <div class="blog-section">
+        <!-- All Posts Section -->
+       
+        <!-- Commenting out All Posts Section
+        <div class="blog-section all-posts-section"> -->
+            <!-- Commenting out post-grid section 
             <h2>All Posts</h2>
-            <div class="post-grid">
+            <div class="post-grid"> -->
+ 
+                <!-- Featured post repeated here -->
+
+                <!-- Commenting out featured post repeated here 
+                <div class="post-card">
+                    <div class="post-title">Bonsol: Infinite Compute for Solana</div>
+                    <div class="post-description">Explore how Bonsol is revolutionizing the Solana ecosystem through its verifiable computation framework and community-driven development.</div>
+                    <a href="blogPosts/bonsol-infinite-compute.html" class="read-more">Read More</a>
+                </div>
+                end of featured post comment-->
+
+                <!-- Other upcoming posts -->
+
+                <!-- Commenting out other upcoming posts 
                 <div class="post-card">
                     <div class="post-title">Introducing Bonsol Labs</div>
                     <div class="post-description">The journey begins: Learn about our mission and vision for the Solana ecosystem.</div>
-                    <a href="#" class="read-more">Coming Soon</a>
+                    <p><b>Coming Soon...</b></p>
                 </div>
+                
                 <div class="post-card">
-                    <div class="post-title">$BON Token Launch</div>
+                    <div class="post-title">$BON Token</div>
                     <div class="post-description">Everything you need to know about the $BON token and its utility.</div>
-                    <a href="#" class="read-more">Coming Soon</a>
+                    <p><b>Coming Soon...</b></p>
+                    end of other upcoming posts comment-->
+
                 </div>
                 <!-- Add more post cards as needed -->
             </div>
