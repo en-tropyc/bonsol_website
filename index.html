@@ -29,8 +29,22 @@
         /* Simplified Navigation styling */
         .nav {
             background: #fff;
-            padding: 0 0 1rem 0;
+            padding: 1rem 0;
             border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            max-width: 200px;
+            height: auto;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
         }
 
         .nav a {
@@ -44,7 +58,6 @@
             text-decoration: underline;
         }
 
-        /* Add to existing nav styles */
         .nav a.active {
             text-decoration: underline;
         }
@@ -86,22 +99,23 @@
 <body>
     <div class="content">
         <nav class="nav">
-            <a href="index.html" class="active">Home</a>
-            <a href="about.html">About</a>
-            <a href="collective.html">Collective</a>
-            <a href="blog.html">Blog</a>
-            <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
-            <a href="https://x.com/bonsol_labs" target="_blank">X</a>
+            <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="nav-logo">
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="collective.html">Collective</a>
+                <a href="blog.html">Blog</a>
+                <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
+                <a href="https://x.com/bonsol_labs" target="_blank">X</a>
+            </div>
         </nav>
         <hr class="solid-hr">
 
-        <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
         <pre>
-Solana is evolving into a ZK-powered L1
+Solana is a ZK chain
         </pre>
 
-
-        <h1>Introduction</h1>
+        <!-- <h1>Introduction</h1> -->
         <p>Solana stands out as a highly capable Layer 1 (L1) blockchain, especially for those looking to develop zero-knowledge (ZK) applications.</p>
 
         <p>A key aspect of Solana's suitability for ZK applications is its runtime support for elliptic curve operations. Elliptic curve cryptography (ECC) is a cornerstone in the construction of ZK proofs, which enable one party to prove the truth of a statement to another party without revealing any underlying data. Solana's native support for these operations significantly simplifies the development process, allowing for more efficient and secure implementation of ZK proofs.</p>

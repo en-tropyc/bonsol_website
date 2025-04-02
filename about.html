@@ -19,8 +19,22 @@
 
         .nav {
             background: #fff;
-            padding: 0 0 1rem 0;
+            padding: 1rem 0;
             border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            max-width: 200px;
+            height: auto;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
         }
 
         .nav a {
@@ -36,7 +50,6 @@
 
         .nav a.active {
             text-decoration: underline;
-            font-weight: bold;
         }
 
         .content {
@@ -88,51 +101,52 @@
 <body>
     <div class="content">
         <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="about.html" class="active">About</a>
-            <a href="collective.html">Collective</a>
-            <a href="blog.html">Blog</a>
-            <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
-            <a href="https://x.com/bonsol_labs" target="_blank">X</a>
+            <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="nav-logo">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="collective.html">Collective</a>
+                <a href="blog.html">Blog</a>
+                <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
+                <a href="https://x.com/bonsol_labs" target="_blank">X</a>
+            </div>
         </nav>
         <hr class="solid-hr">
-        <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
+
         <pre>
-Verifiable compute for Solana
+What is Bonsol?
         </pre>
 
-    </div>
+        <div class="content">
 
-    <div class="content">
-        <h1>What is Bonsol?</h1>
+            <p>Verifiable Compute ("VC") is a cryptographic technique that centers on running a specific workload in a way that produces an attestation of its workings which can be publicly verified without running the computation again. In practice, VC utilizes different cryptographic primitives to ensure computational integrity. Ultimately, this enables external parties to run computations on behalf of a user while ensuring the validity of the computation's inputs, outputs, and methods. The cost benefits and efficiencies of this approach are massive at scale.</p>
 
-        <p>Verifiable Compute ("VC") is a cryptographic technique that centers on running a specific workload in a way that produces an attestation of its workings which can be publicly verified without running the computation again. In practice, VC utilizes different cryptographic primitives to ensure computational integrity. Ultimately, this enables external parties to run computations on behalf of a user while ensuring the validity of the computation's inputs, outputs, and methods. The cost benefits and efficiencies of this approach are massive at scale.</p>
+            <p>Bonsol is a public good for enabling VC on Solana by providing:</p>
+            <ul>
+                <li>Libraries and SDKs for easy application integration</li>
+                <li>A marketplace for producing and consuming proofs</li>
+                <li>Economic incentives that align the entire network</li>
+            </ul>
 
-        <p>Bonsol is a public good for enabling VC on Solana by providing:</p>
-        <ul>
-            <li>Libraries and SDKs for easy application integration</li>
-            <li>A marketplace for producing and consuming proofs</li>
-            <li>Economic incentives that align the entire network</li>
-        </ul>
+            <p>Its objectives are:</p>
+            <ul>
+                <li><strong>Fair Pricing:</strong> The most competitive and fair pricing for verifiable compute tasks in a way that's fair to provers and consumers.</li>
+                <li><strong>Quality of Service:</strong> Lowest latency of response times for workload requests with consistent accuracy for the responses received.</li>
+                <li><strong>Decentralization:</strong> Without compromising to become centralized.</li>
+            </ul>
+        </div>
 
-        <p>Its objectives are:</p>
-        <ul>
-            <li><strong>Fair Pricing:</strong> The most competitive and fair pricing for verifiable compute tasks in a way that's fair to provers and consumers.</li>
-            <li><strong>Quality of Service:</strong> Lowest latency of response times for workload requests with consistent accuracy for the responses received.</li>
-            <li><strong>Decentralization:</strong> Without compromising to become centralized.</li>
-        </ul>
-    </div>
-
-    <div class="content">
-        <h2>Ecosystem Agents</h2>
-            <h3>Provers</h3>
-            <p>The engine behind a fully decentralized Bonsol, providing resources for completing workload requests.</p>
-                
-            <h3>Consumers</h3>
-            <p>Applications and individuals requiring off-chain computation solutions.</p>
-                
-            <h3>Contributors</h3>
-            <p>Developers and researchers who contribute to Bonsol's codebase, documentation, and research.</p>
+        <div class="content">
+            <h2>Ecosystem Agents</h2>
+                <h3>Provers</h3>
+                <p>The engine behind a fully decentralized Bonsol, providing resources for completing workload requests.</p>
+                    
+                <h3>Consumers</h3>
+                <p>Applications and individuals requiring off-chain computation solutions.</p>
+                    
+                <h3>Contributors</h3>
+                <p>Developers and researchers who contribute to Bonsol's codebase, documentation, and research.</p>
+        </div>
     </div>
 </body>
 </html> 
