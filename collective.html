@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonsol</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/bonsol-Square-Favicon.png">
+    <style>
+        /* Monospace styling */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 0;
+            background: #fff;
+            color: #333;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        /* Content styling */
+        .content {
+            background: #fff;
+            padding: 0;
+            border: none;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Simplified Navigation styling */
+        .nav {
+            background: #fff;
+            padding: 1rem 0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            max-width: 200px;
+            height: auto;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            margin-right: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .nav a.active {
+            text-decoration: underline;
+        }
+        pre {
+            background: #fff;
+            padding: 0;
+            overflow-x: auto;
+            margin: 0;
+            text-align: left;
+            margin-right: 300px;  /* Same alignment as token.html */
+        }
+        /* Horizontal line styling */
+        hr {
+            border: none;
+            height: 1px;
+            margin: 2rem 0;
+            background: repeating-linear-gradient(90deg,
+                #333,
+                #333 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .solid-hr {
+            border: none;
+            height: 1px;
+            background-color: #333;
+            margin: 0rem 0;
+        }
+        /* logo grid & logo item styling */
+        .logo {
+            max-width: 300px; /* adjust this value as needed */
+            height: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px 20px;
+            justify-content: center;
+        }
+
+        .logo-item {
+            flex: 0 0 calc(50% - 10px); /* This ensures 2 items per row */
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        .logo-item img {
+            max-width: 400px;
+            height: auto;
+            max-height: 100px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal-links {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;  /* Space between elements */
+        }
+
+        .modal-links a {
+            color: #fff;
+            text-decoration: none;
+            background-color: #000;
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+
+        .modal-links a:hover {
+            background-color: #333;
+        }
+
+        .modal-links .separator {
+            color: #333;  /* Color for the separator */
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <nav class="nav">
+            <img src="images/bonsol-blackword-logo.png" alt="Bonsol" class="nav-logo">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="collective.html" class="active">Collective</a>
+                <a href="blog.html">Blog</a>
+                <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
+                <a href="https://x.com/bonsol_labs" target="_blank">X</a>
+            </div>
+        </nav>
+
+        <hr class="solid-hr">
+        <pre>
+Building the future together
+        </pre>
+
+        <h1>Collective</h1>
+        <p>The Bonsol Collective is a group of individuals & entities who are passionate about the future of verifiable compute and dedicated to supporting the development of the Bonsol ecosystem on Solana.</p>
+        <p>If you are interested in joining the Bonsol Collective, please reach out to us on <a href="https://x.com/bonsol_labs" target="_blank">X</a>.</p>
+        
+
+        <section id="logos">
+            <h2>Co-Founders:</h2>
+            <div class="logo-grid">
+                <!-- Anagram  --> 
+                <div class="logo-item" 
+                     data-title="Anagram" 
+                     data-description="Anagram description here..."
+                     data-twitter="https://x.com/anagramxyz"
+                     data-website="https://anagram.xyz">
+                    <img src="images/anagramLogo.png" alt="Anagram Logo" title="Anagram">
+                </div>
+
+                <!-- Zero Computing  --> 
+                <div class="logo-item" 
+                     data-title="Zero Computing" 
+                     data-description="Zero Computing is a platform for orchestrating vast amounts of compute to make zero-knowledge proof generation fast and efficient. We specialize in provisioning highly-customized instances tailored down to the specificities of individual proof requests, leading to the most competitive proof costs on the market. By combining this custom virtualization layer with a global scheduler to maximize the cross-network efficiency of resources, we provide an on-demand service that reduces costs for teams while being able to meet any shape of demand."
+                     data-twitter="https://x.com/zero_computing"
+                     data-website="https://zerocomputing.com/"> 
+                    <img src="images/ZeroLogo.png" alt="Zero Computing Logo" title="Zero Computing">
+                </div>
+            </div>
+
+            <h2>Collective Members:</h2>
+            <div class="logo-grid">
+                <!-- Everstake  --> 
+                <div class="logo-item" 
+                     data-title="Everstake" 
+                     data-description="Everstake is the leading institutional-grade staking infrastructure and services provider, trusted by over 735,000 users with $6.5 billion in staked assets. Its high-performance servers, broadband channels, and advanced network topology ensure our 99.9% uptime across supported networks. With six years of experience and operations on 85 blockchains, Everstake offers reliable and diverse staking solutions for both institutional investors and everyday crypto holders."
+                     data-twitter="https://x.com/everstake_pool"
+                     data-website="https://everstake.one/"> 
+                    <img src="images/everstake-Logo.png" alt="Everstake Logo" title="Everstake">
+                </div>
+
+                <!-- Fermah  --> 
+                <div class="logo-item" 
+                     data-title="Fermah" 
+                     data-description="Fermah is a universal proof market. 
+
+                     The supply side consists of machines such as GPUs and CPUs. On the demand side, Fermah can generate proofs for any instance in which ZK is used.
+                     
+                     Fermah is optimized for cheap, fast, and reliable ZK proof generation."
+                     data-twitter="https://x.com/fermah_xyz"
+                     data-website="https://www.fermah.xyz">
+                    <img src="images/fermah-Logo.png" alt="Fermah Logo" title="Fermah">
+                    </a>
+                </div>
+                <!-- Add more logos as needed -->
+                <!-- Darklake.fi  --> 
+                <div class="logo-item" 
+                     data-title="Darklake" 
+                     data-description="Darklake is building Solana's missing smoothest settlement engine, designed to capture and democratize the MEV market through innovative zero-knowledge proof implementation. 
+
+                     Founded by Vitor Py (previously at IBM and Facebook), Darklake's breakthrough technology ensures LP value return while establishing more equitable financial systems through advanced privacy focused DeFi primitives. 
+                     
+                     As winners of Colosseum Hackathon, Darklake's infrastructure enables fair markets by preventing front-running and sandwich attacks, preserving trade privacy while maintaining the high performance native to Solana's ecosystem.
+                     "
+                     data-twitter="https://x.com/darklakefi"
+                     data-website="https://darklake.fi/">
+                    <img src="images/darklake-Logo.png" alt="Darklake Logo" title="Darklake">
+                </div>
+
+                <!-- 8 bit oracle  -->
+                <div class="logo-item" style="margin-top: 10px;"
+                     data-title="8-Bit Oracle" 
+                     data-description="The 8-Bit Oracle merges ancient Chinese divination with tech-noir aesthetics, where timeless wisdom cascades through streams of digital rain. This interactive platform generates and interprets the 64 I-Ching hexagrams into plain language, reconnecting users with the fundamental binary patterns—yin and yang—that underpin our reality, now enhanced with Bonsol's zero-knowledge verification"
+                     data-twitter="https://x.com/8bitoracle"
+                     data-website="https://8bitoracle.ai/">
+                    <img src="images/8bitoracle-Logo.png" alt="8bit Oracle Logo" title="8bit Oracle">
+                </div>
+
+                <!-- MaKo  -->
+                <div class="logo-item" style="margin-top: 18px;"
+                     data-title="MaKo" 
+                     data-description="MaKo is working on..."
+                     data-twitter="https://x.com/dubbel06">
+                    <img src="images/mako-Logo.jpg" alt="Mako Logo" title="Mako">
+                </div>
+
+                <!-- Lotus Sutra  -->
+                <div class="logo-item" style="margin-top: 18px;"
+                     data-title="Lotus Sutra" 
+                     data-description="Lotus Sutra is working on..."
+                     data-twitter="https://x.com/AwakenTheLotus"
+                     data-website="https://www.reddit.com/r/LotusSutra/">
+                    <img src="images/lotusSutra-Logo.jpeg" alt="Lotus Sutra Logo" title="Lotus Sutra">
+                </div>
+    
+                <!-- TBD - SonicSVM  --> 
+                <!-- TBD - zkVerify  -->  
+
+            </div>
+   
+        </section>
+
+    </div>
+
+    <!-- Logo modal; add before closing body tag -->
+    <div id="logoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <div class="modal-links">
+                <a id="modalTwitter" href="" target="_blank"><b>X</b></a> | 
+                <a id="modalWebsite" href="" target="_blank"><b>Website</b></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for logo modal; add before closing body tag -->
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('logoModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Add click handlers to all logo items
+        document.querySelectorAll('.logo-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                // Get data from the logo item
+                const title = item.getAttribute('data-title');
+                const description = item.getAttribute('data-description');
+                const twitter = item.getAttribute('data-twitter');
+                const website = item.getAttribute('data-website');
+                
+                // Update and show modal
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                
+                // Get the links div
+                const linksDiv = document.querySelector('.modal-links');
+                
+                // Clear existing links
+                linksDiv.innerHTML = '';
+                
+                // Add Twitter link if it exists
+                if (twitter) {
+                    linksDiv.innerHTML += `<a href="${twitter}" target="_blank"><b>X</b></a>`;
+                }
+                    
+                // Add separator if both links exist
+                if (twitter && website) {
+                    linksDiv.innerHTML += `<span class="separator">|</span>`;
+                }
+                    
+                // Add Website link if it exists
+                if (website) {
+                    linksDiv.innerHTML += `<a href="${website}" target="_blank"><b>Website</b></a>`;
+                }
+                
+                modal.style.display = 'block';
+            });
+        });
+
+        // Close modal when clicking X
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Add event listener for escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
