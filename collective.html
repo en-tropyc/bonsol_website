@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bonsol</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="images/bonsol-circle-logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/bonsol-Square-Favicon.png">
     <style>
         /* Monospace styling */
         body {
@@ -141,6 +141,30 @@
             color: #000;
         }
 
+        .modal-links {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;  /* Space between elements */
+        }
+
+        .modal-links a {
+            color: #fff;
+            text-decoration: none;
+            background-color: #000;
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+
+        .modal-links a:hover {
+            background-color: #333;
+        }
+
+        .modal-links .separator {
+            color: #333;  /* Color for the separator */
+            
+        }
+
     </style>
 </head>
 <body>
@@ -169,18 +193,21 @@ Learn about our community of partners
             <h2>Co-Founders:</h2>
             <div class="logo-grid">
                 <!-- Anagram  --> 
-                <div class="logo-item">
-                    <a href="https://anagram.xyz" target="_blank">
-                        <img src="images/anagramLogo.png" alt="Anagram Logo" title="Anagram">
-                    </a>
+                <div class="logo-item" 
+                     data-title="Anagram" 
+                     data-description="Anagram description here..."
+                     data-twitter="https://x.com/anagramxyz"
+                     data-website="https://anagram.xyz">
+                    <img src="images/anagramLogo.png" alt="Anagram Logo" title="Anagram">
                 </div>
+
                 <!-- Zero Computing  --> 
                 <div class="logo-item" 
                      data-title="Zero Computing" 
-                     data-description="Zero Computing began as a specialized zero-knowledge prover. Much as Bitcoin miners and Ethereum validators saw early success in processing blocks, Zero Computing is capturing the surge of blocks produced by zk proofs. We are also co-founders of Bonsol, a new Solana native Verifiable Compute framework. This platform includes developer toolkits and a decentralized prover network to support the next generation of Solana applications and enable powerful use cases of off-chain compute.">
-                    <a href="https://zerocomputing.com" target="_blank">
-                        <img src="images/ZeroLogo.png" alt="Zero Computing Logo" title="Zero Computing">
-                    </a>
+                     data-description="Zero Computing is a platform for orchestrating vast amounts of compute to make zero-knowledge proof generation fast and efficient. We specialize in provisioning highly-customized instances tailored down to the specificities of individual proof requests, leading to the most competitive proof costs on the market. By combining this custom virtualization layer with a global scheduler to maximize the cross-network efficiency of resources, we provide an on-demand service that reduces costs for teams while being able to meet any shape of demand."
+                     data-twitter="https://x.com/zero_computing"
+                     data-website="https://zerocomputing.com/"> 
+                    <img src="images/ZeroLogo.png" alt="Zero Computing Logo" title="Zero Computing">
                 </div>
             </div>
 
@@ -189,54 +216,64 @@ Learn about our community of partners
                 <!-- Everstake  --> 
                 <div class="logo-item" 
                      data-title="Everstake" 
-                     data-description="Everstake is the leading institutional-grade staking infrastructure and services provider, trusted by over 735,000 users with $6.5 billion in staked assets. Its high-performance servers, broadband channels, and advanced network topology ensure our 99.9% uptime across supported networks. With six years of experience and operations on 85 blockchains, Everstake offers reliable and diverse staking solutions for both institutional investors and everyday crypto holders.">
-                    <a href="https://everstake.one/" target="_blank">
-                        <img src="images/everstake-Logo.png" alt="Everstake Logo" title="Everstake">
-                    </a>
+                     data-description="Everstake is the leading institutional-grade staking infrastructure and services provider, trusted by over 735,000 users with $6.5 billion in staked assets. Its high-performance servers, broadband channels, and advanced network topology ensure our 99.9% uptime across supported networks. With six years of experience and operations on 85 blockchains, Everstake offers reliable and diverse staking solutions for both institutional investors and everyday crypto holders."
+                     data-twitter="https://x.com/everstake_pool"
+                     data-website="https://everstake.one/"> 
+                    <img src="images/everstake-Logo.png" alt="Everstake Logo" title="Everstake">
                 </div>
+
                 <!-- Fermah  --> 
                 <div class="logo-item" 
                      data-title="Fermah" 
-                     data-description="Fermah is working on...">
-                    <a href="https://www.fermah.xyz/" target="_blank">
-                        <img src="images/fermah-Logo.png" alt="Fermah Logo" title="Fermah">
+                     data-description="Fermah is a universal proof market. 
+
+                     The supply side consists of machines such as GPUs and CPUs. On the demand side, Fermah can generate proofs for any instance in which ZK is used.
+                     
+                     Fermah is optimized for cheap, fast, and reliable ZK proof generation."
+                     data-twitter="https://x.com/fermah_xyz"
+                     data-website="https://www.fermah.xyz">
+                    <img src="images/fermah-Logo.png" alt="Fermah Logo" title="Fermah">
                     </a>
                 </div>
                 <!-- Add more logos as needed -->
                 <!-- Darklake.fi  --> 
                 <div class="logo-item" 
                      data-title="Darklake" 
-                     data-description="Darklake is excited to join the Bonsol Collective as a vanguard partner determined to liberate DeFi from its current constraints. As builders of Solana's smoothest settlement engine, we're uniquely positioned to leverage Bonsol's zk-prover network and off-chain compute framework to create next-generation privacy-preserving financial applications.">
-                    <a href="https://darklake.fi/" target="_blank">
-                        <img src="images/darklake-Logo.png" alt="Darklake Logo" title="Darklake">
-                    </a>
+                     data-description="Darklake is building Solana's missing smoothest settlement engine, designed to capture and democratize the MEV market through innovative zero-knowledge proof implementation. 
+
+                     Founded by Vitor Py (previously at IBM and Facebook), Darklake's breakthrough technology ensures LP value return while establishing more equitable financial systems through advanced privacy focused DeFi primitives. 
+                     
+                     As winners of Colosseum Hackathon, Darklake's infrastructure enables fair markets by preventing front-running and sandwich attacks, preserving trade privacy while maintaining the high performance native to Solana's ecosystem.
+                     "
+                     data-twitter="https://x.com/darklakefi"
+                     data-website="https://darklake.fi/">
+                    <img src="images/darklake-Logo.png" alt="Darklake Logo" title="Darklake">
                 </div>
 
                 <!-- 8 bit oracle  -->
                 <div class="logo-item" style="margin-top: 10px;"
-                     data-title="8bit Oracle" 
-                     data-description="The 8-BIt Oracle is a generative fortune-telling app, based on the I-Ching and can be found at 8bitoracle.ai.
-
-                     On default, you ask a question, and a hexagram is randomly chosen.  We closely mirror the yarrow stalk method in our code, with precisely the same probabilities for drawing each hexagram line.  The hexagram meanings are interpreted by AI, and an inner monologue and response are generated.
-                     
-                     You can switch to Chat Mode so that it is a normal chatbot, but the AI is still primed to respond as a wise sage who is very knowledgeable in the I-Ching.">
-                    <a href="https://8bitoracle.ai/" target="_blank">
-                        <img src="images/8bitoracle-Logo.png" alt="8bit Oracle Logo" title="8bit Oracle">
-                    </a>
+                     data-title="8-Bit Oracle" 
+                     data-description="The 8-Bit Oracle merges ancient Chinese divination with tech-noir aesthetics, where timeless wisdom cascades through streams of digital rain. This interactive platform generates and interprets the 64 I-Ching hexagrams into plain language, reconnecting users with the fundamental binary patterns—yin and yang—that underpin our reality, now enhanced with Bonsol's zero-knowledge verification"
+                     data-twitter="https://x.com/8bitoracle"
+                     data-website="https://8bitoracle.ai/">
+                    <img src="images/8bitoracle-Logo.png" alt="8bit Oracle Logo" title="8bit Oracle">
                 </div>
 
-                <!-- Rubicon  -->
-                <div class="logo-item" style="margin-top: 18px;">
-                    <a href="https://docs.google.com/presentation/d/1WwUSjFy-Sl-J8WjcWjOM99Pku2SUYYxO0bHXeQjiKv8/edit?usp=sharing" target="_blank">
-                        <img src="images/mako-Logo.jpg" alt="Mako Logo" title="Mako">
-                    </a>
+                <!-- MaKo  -->
+                <div class="logo-item" style="margin-top: 18px;"
+                     data-title="MaKo" 
+                     data-description="MaKo is working on..."
+                     data-twitter="https://x.com/dubbel06">
+                    <img src="images/mako-Logo.jpg" alt="Mako Logo" title="Mako">
                 </div>
 
                 <!-- Lotus Sutra  -->
-                <div class="logo-item" style="margin-top: 18px;">
-                    <a href="https://x.com/AwakenTheLotus" target="_blank">
-                        <img src="images/lotusSutra-Logo.jpeg" alt="Lotus Sutra Logo" title="Lotus Sutra">
-                    </a>
+                <div class="logo-item" style="margin-top: 18px;"
+                     data-title="Lotus Sutra" 
+                     data-description="Lotus Sutra is working on..."
+                     data-twitter="https://x.com/AwakenTheLotus"
+                     data-website="https://www.reddit.com/r/LotusSutra/">
+                    <img src="images/lotusSutra-Logo.jpeg" alt="Lotus Sutra Logo" title="Lotus Sutra">
                 </div>
     
                 <!-- TBD - SonicSVM  --> 
@@ -248,16 +285,20 @@ Learn about our community of partners
 
     </div>
 
-    <!-- Add this right before closing body tag -->
+    <!-- Logo modal; add before closing body tag -->
     <div id="logoModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2 id="modalTitle"></h2>
             <p id="modalDescription"></p>
+            <div class="modal-links">
+                <a id="modalTwitter" href="" target="_blank"><b>X</b></a> | 
+                <a id="modalWebsite" href="" target="_blank"><b>Website</b></a>
+            </div>
         </div>
     </div>
 
-    <!-- Add this before closing body tag -->
+    <!-- Script for logo modal; add before closing body tag -->
     <script>
         // Get modal elements
         const modal = document.getElementById('logoModal');
@@ -268,20 +309,38 @@ Learn about our community of partners
         // Add click handlers to all logo items
         document.querySelectorAll('.logo-item').forEach(item => {
             item.addEventListener('click', (e) => {
-                // Prevent the link from opening if clicking the logo
-                if (e.target.tagName === 'IMG') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Get data from the logo item
-                    const title = item.getAttribute('data-title');
-                    const description = item.getAttribute('data-description');
-                    
-                    // Update and show modal
-                    modalTitle.textContent = title;
-                    modalDescription.textContent = description;
-                    modal.style.display = 'block';
+                // Get data from the logo item
+                const title = item.getAttribute('data-title');
+                const description = item.getAttribute('data-description');
+                const twitter = item.getAttribute('data-twitter');
+                const website = item.getAttribute('data-website');
+                
+                // Update and show modal
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                
+                // Get the links div
+                const linksDiv = document.querySelector('.modal-links');
+                
+                // Clear existing links
+                linksDiv.innerHTML = '';
+                
+                // Add Twitter link if it exists
+                if (twitter) {
+                    linksDiv.innerHTML += `<a href="${twitter}" target="_blank"><b>X</b></a>`;
                 }
+                    
+                // Add separator if both links exist
+                if (twitter && website) {
+                    linksDiv.innerHTML += `<span class="separator">|</span>`;
+                }
+                    
+                // Add Website link if it exists
+                if (website) {
+                    linksDiv.innerHTML += `<a href="${website}" target="_blank"><b>Website</b></a>`;
+                }
+                
+                modal.style.display = 'block';
             });
         });
 
