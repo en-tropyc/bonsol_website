@@ -1,685 +1,312 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Bonsol: Infinite Compute for Solana</title><style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
-html {
-	-webkit-print-color-adjust: exact;
-}
-* {
-	box-sizing: border-box;
-	-webkit-print-color-adjust: exact;
-}
-
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-@media only screen {
-	body {
-		margin: 2em auto;
-		max-width: 900px;
-		color: rgb(55, 53, 47);
-	}
-}
-
-body {
-	line-height: 1.5;
-	white-space: pre-wrap;
-}
-
-a,
-a.visited {
-	color: inherit;
-	text-decoration: underline;
-}
-
-.pdf-relative-link-path {
-	font-size: 80%;
-	color: #444;
-}
-
-h1,
-h2,
-h3 {
-	letter-spacing: -0.01em;
-	line-height: 1.2;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-
-.page-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-top: 0;
-	margin-bottom: 0.75em;
-}
-
-h1 {
-	font-size: 1.875rem;
-	margin-top: 1.875rem;
-}
-
-h2 {
-	font-size: 1.5rem;
-	margin-top: 1.5rem;
-}
-
-h3 {
-	font-size: 1.25rem;
-	margin-top: 1.25rem;
-}
-
-.source {
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	padding: 1.5em;
-	word-break: break-all;
-}
-
-.callout {
-	border-radius: 3px;
-	padding: 1rem;
-}
-
-figure {
-	margin: 1.25em 0;
-	page-break-inside: avoid;
-}
-
-figcaption {
-	opacity: 0.5;
-	font-size: 85%;
-	margin-top: 0.5em;
-}
-
-mark {
-	background-color: transparent;
-}
-
-.indented {
-	padding-left: 1.5em;
-}
-
-hr {
-	background: transparent;
-	display: block;
-	width: 100%;
-	height: 1px;
-	visibility: visible;
-	border: none;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-img {
-	max-width: 100%;
-}
-
-@media only print {
-	img {
-		max-height: 100vh;
-		object-fit: contain;
-	}
-}
-
-@page {
-	margin: 1in;
-}
-
-.collection-content {
-	font-size: 0.875rem;
-}
-
-.column-list {
-	display: flex;
-	justify-content: space-between;
-}
-
-.column {
-	padding: 0 1em;
-}
-
-.column:first-child {
-	padding-left: 0;
-}
-
-.column:last-child {
-	padding-right: 0;
-}
-
-.table_of_contents-item {
-	display: block;
-	font-size: 0.875rem;
-	line-height: 1.3;
-	padding: 0.125rem;
-}
-
-.table_of_contents-indent-1 {
-	margin-left: 1.5rem;
-}
-
-.table_of_contents-indent-2 {
-	margin-left: 3rem;
-}
-
-.table_of_contents-indent-3 {
-	margin-left: 4.5rem;
-}
-
-.table_of_contents-link {
-	text-decoration: none;
-	opacity: 0.7;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
-}
-
-table,
-th,
-td {
-	border: 1px solid rgba(55, 53, 47, 0.09);
-	border-collapse: collapse;
-}
-
-table {
-	border-left: none;
-	border-right: none;
-}
-
-th,
-td {
-	font-weight: normal;
-	padding: 0.25em 0.5em;
-	line-height: 1.5;
-	min-height: 1.5em;
-	text-align: left;
-}
-
-th {
-	color: rgba(55, 53, 47, 0.6);
-}
-
-ol,
-ul {
-	margin: 0;
-	margin-block-start: 0.6em;
-	margin-block-end: 0.6em;
-}
-
-li > ol:first-child,
-li > ul:first-child {
-	margin-block-start: 0.6em;
-}
-
-ul > li {
-	list-style: disc;
-}
-
-ul.to-do-list {
-	padding-inline-start: 0;
-}
-
-ul.to-do-list > li {
-	list-style: none;
-}
-
-.to-do-children-checked {
-	text-decoration: line-through;
-	opacity: 0.375;
-}
-
-ul.toggle > li {
-	list-style: none;
-}
-
-ul {
-	padding-inline-start: 1.7em;
-}
-
-ul > li {
-	padding-left: 0.1em;
-}
-
-ol {
-	padding-inline-start: 1.6em;
-}
-
-ol > li {
-	padding-left: 0.2em;
-}
-
-.mono ol {
-	padding-inline-start: 2em;
-}
-
-.mono ol > li {
-	text-indent: -0.4em;
-}
-
-.toggle {
-	padding-inline-start: 0em;
-	list-style-type: none;
-}
-
-/* Indent toggle children */
-.toggle > li > details {
-	padding-left: 1.7em;
-}
-
-.toggle > li > details > summary {
-	margin-left: -1.1em;
-}
-
-.selected-value {
-	display: inline-block;
-	padding: 0 0.5em;
-	background: rgba(206, 205, 202, 0.5);
-	border-radius: 3px;
-	margin-right: 0.5em;
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
-	white-space: nowrap;
-}
-
-.collection-title {
-	display: inline-block;
-	margin-right: 1em;
-}
-
-.page-description {
-	margin-bottom: 2em;
-}
-
-.simple-table {
-	margin-top: 1em;
-	font-size: 0.875rem;
-	empty-cells: show;
-}
-.simple-table td {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table th {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table-header-color {
-	background: rgb(247, 246, 243);
-	color: black;
-}
-.simple-table-header {
-	font-weight: 500;
-}
-
-time {
-	opacity: 0.5;
-}
-
-.icon {
-	display: inline-block;
-	max-width: 1.2em;
-	max-height: 1.2em;
-	text-decoration: none;
-	vertical-align: text-bottom;
-	margin-right: 0.5em;
-}
-
-img.icon {
-	border-radius: 3px;
-}
-
-.user-icon {
-	width: 1.5em;
-	height: 1.5em;
-	border-radius: 100%;
-	margin-right: 0.5rem;
-}
-
-.user-icon-inner {
-	font-size: 0.8em;
-}
-
-.text-icon {
-	border: 1px solid #000;
-	text-align: center;
-}
-
-.page-cover-image {
-	display: block;
-	object-fit: cover;
-	width: 100%;
-	max-height: 30vh;
-}
-
-.page-header-icon {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
-
-.page-header-icon-with-cover {
-	margin-top: -0.72em;
-	margin-left: 0.07em;
-}
-
-.page-header-icon img {
-	border-radius: 3px;
-}
-
-.link-to-page {
-	margin: 1em 0;
-	padding: 0;
-	border: none;
-	font-weight: 500;
-}
-
-p > .user {
-	opacity: 0.5;
-}
-
-td > .user,
-td > time {
-	white-space: nowrap;
-}
-
-input[type="checkbox"] {
-	transform: scale(1.5);
-	margin-right: 0.6em;
-	vertical-align: middle;
-}
-
-p {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-
-.image {
-	border: none;
-	margin: 1.5em 0;
-	padding: 0;
-	border-radius: 0;
-	text-align: center;
-}
-
-.code,
-code {
-	background: rgba(135, 131, 120, 0.15);
-	border-radius: 3px;
-	padding: 0.2em 0.4em;
-	border-radius: 3px;
-	font-size: 85%;
-	tab-size: 2;
-}
-
-code {
-	color: #eb5757;
-}
-
-.code {
-	padding: 1.5em 1em;
-}
-
-.code-wrap {
-	white-space: pre-wrap;
-	word-break: break-all;
-}
-
-.code > code {
-	background: none;
-	padding: 0;
-	font-size: 100%;
-	color: inherit;
-}
-
-blockquote {
-	font-size: 1.25em;
-	margin: 1em 0;
-	padding-left: 1em;
-	border-left: 3px solid rgb(55, 53, 47);
-}
-
-.bookmark {
-	text-decoration: none;
-	max-height: 8em;
-	padding: 0;
-	display: flex;
-	width: 100%;
-	align-items: stretch;
-}
-
-.bookmark-title {
-	font-size: 0.85em;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 1.75em;
-	white-space: nowrap;
-}
-
-.bookmark-text {
-	display: flex;
-	flex-direction: column;
-}
-
-.bookmark-info {
-	flex: 4 1 180px;
-	padding: 12px 14px 14px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.bookmark-image {
-	width: 33%;
-	flex: 1 1 180px;
-	display: block;
-	position: relative;
-	object-fit: cover;
-	border-radius: 1px;
-}
-
-.bookmark-description {
-	color: rgba(55, 53, 47, 0.6);
-	font-size: 0.75em;
-	overflow: hidden;
-	max-height: 4.5em;
-	word-break: break-word;
-}
-
-.bookmark-href {
-	font-size: 0.75em;
-	margin-top: 0.25em;
-}
-
-.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
-.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
-.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
-.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
-.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
-.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
-.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
-.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
-.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
-.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
-.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
-.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
-.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.highlight-default {
-	color: rgba(55, 53, 47, 1);
-}
-.highlight-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.highlight-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.highlight-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.highlight-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.highlight-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.highlight-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.highlight-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.highlight-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.highlight-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.highlight-default_background {
-	color: rgba(55, 53, 47, 1);
-}
-.highlight-gray_background {
-	background: rgba(248, 248, 247, 1);
-}
-.highlight-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.highlight-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.highlight-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.highlight-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.highlight-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.highlight-purple_background {
-	background: rgba(248, 243, 252, 1);
-}
-.highlight-pink_background {
-	background: rgba(252, 241, 246, 1);
-}
-.highlight-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.block-color-default {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.block-color-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.block-color-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.block-color-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.block-color-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.block-color-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.block-color-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.block-color-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.block-color-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.block-color-default_background {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray_background {
-	background: rgba(248, 248, 247, 1);
-}
-.block-color-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.block-color-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.block-color-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.block-color-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.block-color-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.block-color-purple_background {
-	background: rgba(248, 243, 252, 1);
-}
-.block-color-pink_background {
-	background: rgba(252, 241, 246, 1);
-}
-.block-color-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.select-value-color-uiBlue { background-color: undefined; }
-.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
-.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
-.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
-.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
-.select-value-color-transparentGray { background-color: undefined; }
-.select-value-color-translucentGray { background-color: undefined; }
-.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
-.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
-.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
-.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
-.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
-.select-value-color-pageGlass { background-color: undefined; }
-.select-value-color-washGlass { background-color: undefined; }
-
-.checkbox {
-	display: inline-flex;
-	vertical-align: text-bottom;
-	width: 16;
-	height: 16;
-	background-size: 16px;
-	margin-left: 2px;
-	margin-right: 5px;
-}
-
-.checkbox-on {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-
-.checkbox-off {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-	
-</style></head><body><article id="1bc62819-52a2-80be-b471-d280383ea761" class="page sans"><header><h1 class="page-title">Bonsol: Infinite Compute for Solana</h1><p class="page-description"></p></header><div class="page-body"><h1 id="1bc62819-52a2-80d1-b0dd-d5821f5df392" class="">Introduction</h1><p id="1bc62819-52a2-8037-8dd2-fe98c9416186" class="">Solana has proven itself as a highly capable and performant blockchain offering ultra fast transactions, low fees and a culture that finally delivers a great on-chain experience. This confluence establishes Solana as a leader in <a href="https://dune.com/Henrystats/ethereum-vs-solana">crypto-native trading activities</a> while also positioning it as a strong contender to become the home of <a href="https://multicoin.capital/2025/01/22/the-solana-thesis-internet-capital-markets/">internet capital markets</a>. Although the network has found a strong initial PMF, we believe Solana is prime to enter its next era of growth. However, as the network matures and looks to support increasingly complex applications, it faces inherent limitations in its on-chain computation capabilities. Solana needs a way to handle applications with more expensive logic. To address this challenge, we introduce Bonsol, a verifiable computation framework designed for Solana. Bonsol was built to extend Solana’s computation boundaries and to allow developers to outsource complex logic off-chain. By doing this, Bonsol transforms Solana from a place where only certain things are possible, to one where <em>anything</em> is possible.</p><hr id="1bc62819-52a2-80a4-ae3d-f46a4295c2c7"/><h1 id="1bc62819-52a2-8054-a5a1-d5ef549f3a2a" class=""><strong>Understanding Solana’s Computational Limits</strong></h1><p id="1bc62819-52a2-8032-ad39-cc1cdf28cc89" class="">Solana’s speed and efficiency come with its trade-offs. The network imposes strict constraints on compute power and transaction size which can limit the types of programs it can support. While Solana network upgrades <a href="https://x.com/B3nHawkins/status/1866511844157882491">increase compute units</a> (CU), they are incremental and may not be enough to support truly computation-heavy applications in the near term. For example:</p><ul id="1bc62819-52a2-8089-b00c-c4aa2d1e70f1" class="bulleted-list"><li style="list-style-type:disc">Each transaction is capped at a fixed compute unit limit, making resource-intensive tasks like AI model inference or complex gaming logic infeasible.</li></ul><ul id="1bc62819-52a2-8099-92ce-d44af2912b54" class="bulleted-list"><li style="list-style-type:disc">Developers often resort to workarounds like splitting protocols or implementing crank systems to bypass these restrictions, which add layers of complexity and reduce efficiency.</li></ul><p id="1bc62819-52a2-80f8-b454-da624a99fd25" class="">These limitations hinder Solana’s ability to fully realize its full potential as the backbone of the modern internet and one of the largest, most competitive capital markets in the world. With Bonsol, we aim to introduce a way for Solana applications to easily overcome these limitations by integrating off-chain computation.</p><h1 id="1bc62819-52a2-8016-af34-d625717cbcdf" class=""><strong>What is Bonsol?</strong></h1><p id="1bc62819-52a2-80d6-8184-cd00502a07fd" class="">Bonsol is a <strong>Solana-native verifiable computation framework</strong> that allows developers to offload complex computations off-chain while generating cryptographic proofs that can be verified on-chain. Bonsol contains a set of developer tools and a prover network, allowing builders to easily build and deploy verifiable applications with direct integration into a decentralized proof network. Bonsol currently supports the RISC Zero zkVM with plans to integrate more zkVMs in the future. Bonsol transforms Solana into a ZK-capable chain, where high-performance computation meets privacy and scalability. Bonsol lays the foundation for privacy-focused, high complexity use cases, lower on-chain costs, and opportunity to unlock new application paradigms. Bonsol’s mission is to <strong>openly develop </strong>the most performant, scalable, and decentralized compute platform to usher in the next era of growth on Solana.</p><h1 id="1bc62819-52a2-8095-af87-c631ec51dcf0" class=""><strong>What isn’t Bonsol?</strong></h1><p id="1bc62819-52a2-80a1-8682-ff0a65e4aca9" class="">Bonsol is <strong>not a standalone blockchain or a competing L1</strong>. It does not replace Solana’s core infrastructure but rather extends Solana’s computational capabilities beyond its on-chain limitations. Bonsol is also not a centralized cloud provider (AWS/GCP), but rather coordinates a permissionless set of independent provers to facilitate the integration of data center-levels of computation directly into Solana.</p><figure id="1bc62819-52a2-8006-ab96-d97e1fbddc96" class="image" style="text-align:center"><a href="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdz59r8ybD2_0-deJOo-44Ten3gpGmwbCcDKbOigHRSpovCPnTKEAQo3NLqnMnFcA6U1jLlX4mesAsHDt6tbsK5u33eEWCRYaF1NdnaP9sKjbA88wU20GcMwbC1AjGKgY7XzqBLmg?key=hAOo1i_qL2wjBVnD5_e_LwGF"><img style="width:352px" src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdz59r8ybD2_0-deJOo-44Ten3gpGmwbCcDKbOigHRSpovCPnTKEAQo3NLqnMnFcA6U1jLlX4mesAsHDt6tbsK5u33eEWCRYaF1NdnaP9sKjbA88wU20GcMwbC1AjGKgY7XzqBLmg?key=hAOo1i_qL2wjBVnD5_e_LwGF"/></a><figcaption><a href="https://x.com/_weidai/status/1890424616193040606">Source (X)</a></figcaption></figure><h1 id="1bc62819-52a2-8099-bf76-dd7ee1443140" class=""><strong>Key Features</strong></h1><ol type="1" id="1bc62819-52a2-809d-a5d7-dee6bfe1c758" class="numbered-list" start="1"><li><strong>Unlimited Compute Power</strong>: By offloading resource-intensive tasks off-chain, Bonsol removes the CU limitations of Solana transactions.</li></ol><ol type="1" id="1bc62819-52a2-8044-832a-fa9f32454676" class="numbered-list" start="2"><li><strong>On-Chain Verifiability</strong>: Cryptographic proofs ensure that off-chain computations produce succinct, constant-size verifiable programs regardless of their computational complexity.</li></ol><ol type="1" id="1bc62819-52a2-804d-92ce-cd2f9404aa40" class="numbered-list" start="3"><li><strong>Native Integration</strong>: Bonsol is natively integrated with Solana’s ecosystem, allowing developers to enhance existing programs or build entirely new use cases that settle on Solana and leverage Solana resources.</li></ol><ol type="1" id="1bc62819-52a2-80c3-9b3f-e31ec21f199c" class="numbered-list" start="4"><li><strong>Privacy-Preserving Capabilities</strong>: Bonsol supports private data proofs, enabling secure computations without exposing sensitive information.</li></ol><ol type="1" id="1bc62819-52a2-8058-b6e3-ea37810cb645" class="numbered-list" start="5"><li><strong>Community-Driven Development</strong>: As an open-source project, Bonsol invites developers to contribute, experiment, and innovate.</li></ol><h1 id="1bc62819-52a2-8087-9593-e8889332b5d9" class=""><strong>How Bonsol Works</strong></h1><ol type="1" id="1bc62819-52a2-8035-8526-e4b0fb78db4e" class="numbered-list" start="1"><li><strong>Deploying Verifiable Programs</strong>:<ul id="1bc62819-52a2-800a-8234-d5a3350b1371" class="bulleted-list"><li style="list-style-type:disc">Developers define their off-chain logic using a zkVM (we currently support the RISC Zero zkVM, others coming soon 👀).</li></ul><ul id="1bc62819-52a2-800b-bec9-d22c3775f5e0" class="bulleted-list"><li style="list-style-type:disc">These programs are deployed to Solana via Bonsol CLI and made available to the prover network through execution requests.</li></ul></li></ol><ol type="1" id="1bc62819-52a2-8060-9e5d-fca1672d2a82" class="numbered-list" start="2"><li><strong>Submit Execution Requests</strong>:<ul id="1bc62819-52a2-8084-99c1-fa0d5238c4dd" class="bulleted-list"><li style="list-style-type:disc">Users interact with the verifiable program and create execution requests containing the logic they would like to execute off-chain.</li></ul></li></ol><ol type="1" id="1bc62819-52a2-80b1-a28e-e8efadcb4636" class="numbered-list" start="3"><li><strong>Proof Claim:</strong><ul id="1bc62819-52a2-8095-b3bd-f5eb7484d545" class="bulleted-list"><li style="list-style-type:disc">Provers in the Bonsol network listen to new requests on-chain and compete to claim the execution requests according to a set of rewards and punishments to incentivize honest behavior..</li></ul></li></ol><ol type="1" id="1bc62819-52a2-80bc-9251-c2cad828f6af" class="numbered-list" start="4"><li><strong>Proof Generation</strong>:<ul id="1bc62819-52a2-80e9-83cd-ebb4a07b445a" class="bulleted-list"><li style="list-style-type:disc">Provers execute the off-chain logic and generate STARK proofs.</li></ul><ul id="1bc62819-52a2-80fa-b96d-d7b110bc189c" class="bulleted-list"><li style="list-style-type:disc">These proofs are then wrapped into Groth16 SNARKs for efficient on-chain verification.</li></ul></li></ol><ol type="1" id="1bc62819-52a2-80dc-aeb0-d7f21f4e98f5" class="numbered-list" start="5"><li><strong>On-Chain Callback</strong>:<ul id="1bc62819-52a2-8000-95b9-f342cfe86871" class="bulleted-list"><li style="list-style-type:disc">The SNARK proof is submitted to the Solana blockchain for verification.</li></ul></li></ol><ol type="1" id="1bc62819-52a2-80ad-ac72-cdc4681c8d08" class="numbered-list" start="6"><li><strong>Proof Verification:</strong><ul id="1bc62819-52a2-80c2-9f3b-c31f5f3f46ad" class="bulleted-list"><li style="list-style-type:disc">Once verified, the results are forwarded to the requesting program via a callback program.<br/><br/></li></ul></li></ol><figure id="1bc62819-52a2-800b-a01c-df5615d28cda" class="image"><a href="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfrQ3kJcIFZe90AGoj9aTjXxhrrNrF2zhL1KNgxPWVhMSgp6YnTVVrf1oz10xojSHYp4ujA6vHPdf0TH6C7h3uRmmWuofHlqbnceNj9KbolaRMKCToWAmwpoj2oSpOOaJicfJXPtQ?key=hAOo1i_qL2wjBVnD5_e_LwGF"><img style="width:624px" src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfrQ3kJcIFZe90AGoj9aTjXxhrrNrF2zhL1KNgxPWVhMSgp6YnTVVrf1oz10xojSHYp4ujA6vHPdf0TH6C7h3uRmmWuofHlqbnceNj9KbolaRMKCToWAmwpoj2oSpOOaJicfJXPtQ?key=hAOo1i_qL2wjBVnD5_e_LwGF"/></a><figcaption>Bonsol In Action</figcaption></figure><h1 id="1bc62819-52a2-8026-99eb-ee9f20682818" class=""><strong><br/>5 Things to Build on Bonsol<br/></strong></h1><p id="1bc62819-52a2-80e0-b1e3-d5c469e8d0e7" class="">Bonsol unlocks a broad spectrum of applications that were previously constrained by on-chain computation limits. Below is an simplified overview of ideas for what can be built on Bonsol today:</p><table id="1bc62819-52a2-802d-9262-ff6296dce9cf" class="simple-table"><tbody><tr id="1bc62819-52a2-8066-9947-ddde73990815"><td id="]AiE" class=""><strong>Use Case</strong></td><td id="j`:m" class=""><strong>Description</strong></td><td id="UpSO" class=""><strong>Example</strong></td></tr><tr id="1bc62819-52a2-809a-a658-f05edec3c16e"><td id="]AiE" class="">Verifiable Agents</td><td id="j`:m" class="">Fully autonomous, provably secure agents that operate without human intervention.</td><td id="UpSO" class="">Decentralized, yield-generating trading bots with cryptographic proofs ensuring no tampering.</td></tr><tr id="1bc62819-52a2-80d7-b2c1-d3651f0e0a54"><td id="]AiE" class="">Storage and Transaction Proofs</td><td id="j`:m" class="">Prove historical ownership, chain of ownership, or that a specific event occurred on-chain.</td><td id="UpSO" class="">Verifiable database ensuring data integrity and correctness of historical transaction data.</td></tr><tr id="1bc62819-52a2-805a-9d9f-fd8867ecb4d5"><td id="]AiE" class="">Provable Game Engines</td><td id="j`:m" class="">Novel game mechanics by outsourcing simulations or engine logic off-chain.</td><td id="UpSO" class="">Asynchronous strategy games like <a href="http://shoshin.gg/">Shoshin.gg</a> that rely on off-chain computations.</td></tr><tr id="1bc62819-52a2-80a4-b6c0-fc3b8431eb47"><td id="]AiE" class="">Private Liquidity Pools</td><td id="j`:m" class="">Liquidity pools where balances are provable without revealing depositors or traders.</td><td id="UpSO" class="">Execute private order fills within pools while avoiding slippage entirely through private proofs.</td></tr><tr id="1bc62819-52a2-8060-9f21-cf21baf7d0d5"><td id="]AiE" class="">Cross-Chain Activity Proofs</td><td id="j`:m" class="">Provide trust-minimized proofs of activity between chains to enable secure cross-chain operations.</td><td id="UpSO" class="">Prove activity on a destination chain before releasing funds on a home-chain during swaps.</td></tr></tbody></table><h1 id="1bc62819-52a2-804a-88d9-d63dfe09b8b5" class=""><strong>Technical Advantages of Bonsol</strong></h1><h3 id="1bc62819-52a2-80b2-a2b4-f0a5565b2c4b" class=""><strong>1. Groth16 SNARKs</strong></h3><p id="1bc62819-52a2-80fd-b469-c27fd33e820b" class="">Bonsol employs Groth16 SNARKs for proof generation due to their unique benefits:</p><ul id="1bc62819-52a2-8068-b658-c6149b56d835" class="bulleted-list"><li style="list-style-type:disc">Constant-size proofs regardless of computational complexity.</li></ul><ul id="1bc62819-52a2-805d-92fd-cb07008cc493" class="bulleted-list"><li style="list-style-type:disc">Rapid verification times essential for real-time dApp interactions.</li></ul><ul id="1bc62819-52a2-809f-8206-f3647f5c3b78" class="bulleted-list"><li style="list-style-type:disc">Efficient implementation tailored for Solana’s architecture.</li></ul><h3 id="1bc62819-52a2-80fb-b056-f07291beff14" class=""><strong>2. Native Integration with Solana</strong></h3><p id="1bc62819-52a2-8030-a1fd-efacb377aba6" class="">Bonsol implements native Groth16 verifiers on Solana, enabling:</p><ul id="1bc62819-52a2-802e-87b3-e5693e09df18" class="bulleted-list"><li style="list-style-type:disc">Verification within 200k CU limits.</li></ul><ul id="1bc62819-52a2-801d-a38b-e3666c7b2ed5" class="bulleted-list"><li style="list-style-type:disc">Composability with other smart contracts in the same transaction.</li></ul><h3 id="1bc62819-52a2-8093-8fdc-d05a2acddeb6" class=""><strong>3. Incentivized Prover Network</strong></h3><p id="1bc62819-52a2-800c-aa81-ddafeec467b0" class="">Bonsol’s distributed prover network ensures fast execution of zkPrograms through an auction-like mechanism:</p><ul id="1bc62819-52a2-80a8-af92-fc1dca7fe67e" class="bulleted-list"><li style="list-style-type:disc">Provers compete to claim execution requests based on economic incentives.</li></ul><ul id="1bc62819-52a2-8041-822f-fdb1cb15369c" class="bulleted-list"><li style="list-style-type:disc">A dynamic fee structure rewards provers for timely proof generation while penalizing delays or malicious behavior.</li></ul><hr id="1bc62819-52a2-802a-828d-fc0fed041116"/><h1 id="1bc62819-52a2-80c2-93fd-f10dbfc91d61" class=""><strong>Community Involvement and Future Roadmap</strong></h1><p id="1bc62819-52a2-80b4-888f-c27955059d83" class="">Bonsol is more than just a tool — it’s a community-driven initiative aimed at fostering innovation within the Solana ecosystem. We drew heavy inspiration from the Optimism Collective, who pioneered a new model of digital democratic governance optimized to drive rapid and sustained growth of a decentralized ecosystem. Similarly, development of Bonsol is 100% open-source and we are starting the Bonsol Collective — a band of people, projects, and companies collaborating to build a stronger ecosystem for Solana and govern the protocol together. The project is currently live on both Mainnet and Devnet, allowing developers to experiment and contribute immediately.</p><h1 id="1bc62819-52a2-80eb-aba1-dcdcf1d51bc5" class=""><strong>Future Development Goals</strong></h1><ol type="1" id="1bc62819-52a2-809c-83e0-c14b7f46fb5a" class="numbered-list" start="1"><li>Enhance proving mechanisms for greater efficiency.</li></ol><ol type="1" id="1bc62819-52a2-805b-a0fb-d3faee53dfc3" class="numbered-list" start="2"><li>Explore integration with restaking protocols for additional security layers.</li></ol><ol type="1" id="1bc62819-52a2-802f-ab07-df60bfe28fd7" class="numbered-list" start="3"><li>Conduct comprehensive audits to prepare Bonsol for handling billions of dollars in transactions.</li></ol><p id="1bc62819-52a2-8072-b4e2-f56d1b0c230b" class="">If you’re passionate about shaping the future of decentralized computation and learning how Bonsol can unlock capabilities in your application — get in touch with us <a href="https://t.me/bonsolsh">here</a>.</p><hr id="1bc62819-52a2-803d-955f-ed28e87a4b4f"/><h1 id="1bc62819-52a2-80b0-ad1f-e835f17d4229" class=""><strong>Conclusion</strong></h1><p id="1bc62819-52a2-8038-b1d5-efd471038f80" class="">Bonsol represents a paradigm shift in how computationally intensive applications can be built on blockchain networks such as Solana. By bridging the gap between off-chain compute power and on-chain verification, it empowers developers to create groundbreaking dApps without being constrained by existing limitations.</p><p id="1bc62819-52a2-8000-8bbf-e2b1647869c3" class="">As Solana continues its journey towards becoming the home of internet-scale capital markets, we are building Bonsol to play a critical role in driving innovation and adoption across multiple industries. Whether you’re building next-gen DeFi protocols or privacy-preserving applications, Bonsol offers the flexibility and scalability needed to turn your vision into reality.</p><p id="1bc62819-52a2-8019-8f88-d090496e2bc8" class="">If you’re ready to explore infinite compute possibilities on Solana, start building with Bonsol today!</p><p id="1bc62819-52a2-807f-bd0a-dde2235f1446" class="">
-</p><h3 id="1bc62819-52a2-80b2-9e81-e3ca24da6473" class=""><strong>Learn more about Bonsol:</strong></h3><p id="1bc62819-52a2-803a-a3dd-ef7c5696515b" class=""><a href="https://bonsol.org/">Website</a> | <a href="https://bonsol.gitbook.io/docs/core-concepts/introduction">Docs</a> | <a href="https://github.com/anagrambuild/bonsol">GitHub</a> | <a href="https://x.com/Bonsolsh">Twitter</a> | <a href="https://t.me/bonsolsh">Telegram</a></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonsol: Infinite Compute for Solana</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/bonsol-Square-Favicon.png">
+    <style>
+        /* Monospace styling */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 0;
+            background: #fff;
+            color: #333;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        /* Content styling */
+        .content {
+            background: #fff;
+            padding: 0;
+            border: none;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Simplified Navigation styling */
+        .nav {
+            background: #fff;
+            padding: 0 0 1rem 0;
+            border: none;
+        }
+
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            margin-right: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Add to existing nav styles */
+        .nav a.active {
+            text-decoration: underline;
+        }
+        pre {
+            background: #fff;
+            padding: 0;
+            overflow-x: auto;
+            margin: 0;
+            text-align: left;
+            margin-right: 300px;  /* Same alignment as token.html */
+        }
+        .logo {
+            max-width: 300px; /* adjust this value as needed */
+            height: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        /* Horizontal line styling */
+        hr {
+            border: none;
+            height: 1px;
+            margin: 2rem 0;
+            background: repeating-linear-gradient(90deg,
+                #333,
+                #333 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .solid-hr {
+            border: none;
+            height: 1px;
+            background-color: #333;
+            margin: 0rem 0;
+        }
+
+        /* Blog post specific styles */
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-post img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+        }
+
+        .blog-post table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .blog-post th, .blog-post td {
+            border: 1px solid #333;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .blog-post th {
+            background-color: #f5f5f5;
+        }
+
+        .blog-post figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .blog-post figure img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog-post figure figcaption {
+            margin-top: 0.5rem;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <nav class="nav">
+            <a href="../index.html">Home</a>
+            <a href="../about.html">About</a>
+            <a href="../token.html">$BON</a>
+            <a href="../collective.html">Bonsol Collective</a>
+            <a href="../blog.html" class="active">Blog</a>
+            <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
+            <a href="https://x.com/bonsol_labs" target="_blank">X</a>
+        </nav>
+        <hr class="solid-hr">
+
+        <img src="../images/bonsol-blackword-logo.png" alt="Bonsol" class="logo">
+        <pre>
+Bonsol: Infinite Compute for Solana
+        </pre>
+
+        <div class="blog-post">
+            <h1>Introduction</h1>
+            <p>Solana has proven itself as a highly capable and performant blockchain offering ultra fast transactions, low fees and a culture that finally delivers a great on-chain experience. This confluence establishes Solana as a leader in <a href="https://dune.com/Henrystats/ethereum-vs-solana">crypto-native trading activities</a> while also positioning it as a strong contender to become the home of <a href="https://multicoin.capital/2025/01/22/the-solana-thesis-internet-capital-markets/">internet capital markets</a>. Although the network has found a strong initial PMF, we believe Solana is prime to enter its next era of growth. However, as the network matures and looks to support increasingly complex applications, it faces inherent limitations in its on-chain computation capabilities. Solana needs a way to handle applications with more expensive logic. To address this challenge, we introduce Bonsol, a verifiable computation framework designed for Solana. Bonsol was built to extend Solana's computation boundaries and to allow developers to outsource complex logic off-chain. By doing this, Bonsol transforms Solana from a place where only certain things are possible, to one where <em>anything</em> is possible.</p>
+
+            <hr>
+
+            <h1>Understanding Solana's Computational Limits</h1>
+            <p>Solana's speed and efficiency come with its trade-offs. The network imposes strict constraints on compute power and transaction size which can limit the types of programs it can support. While Solana network upgrades <a href="https://x.com/B3nHawkins/status/1866511844157882491">increase compute units</a> (CU), they are incremental and may not be enough to support truly computation-heavy applications in the near term. For example:</p>
+            <ul>
+                <li>Each transaction is capped at a fixed compute unit limit, making resource-intensive tasks like AI model inference or complex gaming logic infeasible.</li>
+                <li>Developers often resort to workarounds like splitting protocols or implementing crank systems to bypass these restrictions, which add layers of complexity and reduce efficiency.</li>
+            </ul>
+            <p>These limitations hinder Solana's ability to fully realize its full potential as the backbone of the modern internet and one of the largest, most competitive capital markets in the world. With Bonsol, we aim to introduce a way for Solana applications to easily overcome these limitations by integrating off-chain computation.</p>
+
+            <h1>What is Bonsol?</h1>
+            <p>Bonsol is a <strong>Solana-native verifiable computation framework</strong> that allows developers to offload complex computations off-chain while generating cryptographic proofs that can be verified on-chain. Bonsol contains a set of developer tools and a prover network, allowing builders to easily build and deploy verifiable applications with direct integration into a decentralized proof network. Bonsol currently supports the RISC Zero zkVM with plans to integrate more zkVMs in the future. Bonsol transforms Solana into a ZK-capable chain, where high-performance computation meets privacy and scalability. Bonsol lays the foundation for privacy-focused, high complexity use cases, lower on-chain costs, and opportunity to unlock new application paradigms. Bonsol's mission is to <strong>openly develop</strong> the most performant, scalable, and decentralized compute platform to usher in the next era of growth on Solana.</p>
+
+            <h1>What isn't Bonsol?</h1>
+            <p>Bonsol is <strong>not a standalone blockchain or a competing L1</strong>. It does not replace Solana's core infrastructure but rather extends Solana's computational capabilities beyond its on-chain limitations. Bonsol is also not a centralized cloud provider (AWS/GCP), but rather coordinates a permissionless set of independent provers to facilitate the integration of data center-levels of computation directly into Solana.</p>
+
+            <figure>
+                <a href="https://x.com/_weidai/status/1890424616193040606">
+                    <img src="../images/bonsol-circle-logo.png" alt="Source (X)">
+                </a>
+                <figcaption><a href="https://x.com/_weidai/status/1890424616193040606">Source (X)</a></figcaption>
+            </figure>
+
+            <h1>Key Features</h1>
+            <ol>
+                <li><strong>Unlimited Compute Power</strong>: By offloading resource-intensive tasks off-chain, Bonsol removes the CU limitations of Solana transactions.</li>
+                <li><strong>On-Chain Verifiability</strong>: Cryptographic proofs ensure that off-chain computations produce succinct, constant-size verifiable programs regardless of their computational complexity.</li>
+                <li><strong>Native Integration</strong>: Bonsol is natively integrated with Solana's ecosystem, allowing developers to enhance existing programs or build entirely new use cases that settle on Solana and leverage Solana resources.</li>
+                <li><strong>Privacy-Preserving Capabilities</strong>: Bonsol supports private data proofs, enabling secure computations without exposing sensitive information.</li>
+                <li><strong>Community-Driven Development</strong>: As an open-source project, Bonsol invites developers to contribute, experiment, and innovate.</li>
+            </ol>
+
+            <h1>How Bonsol Works</h1>
+            <ol>
+                <li><strong>Deploying Verifiable Programs</strong>:
+                    <ul>
+                        <li>Developers define their off-chain logic using a zkVM (we currently support the RISC Zero zkVM, others coming soon 👀).</li>
+                        <li>These programs are deployed to Solana via Bonsol CLI and made available to the prover network through execution requests.</li>
+                    </ul>
+                </li>
+                <li><strong>Submit Execution Requests</strong>:
+                    <ul>
+                        <li>Users interact with the verifiable program and create execution requests containing the logic they would like to execute off-chain.</li>
+                    </ul>
+                </li>
+                <li><strong>Proof Claim:</strong>
+                    <ul>
+                        <li>Provers in the Bonsol network listen to new requests on-chain and compete to claim the execution requests according to a set of rewards and punishments to incentivize honest behavior.</li>
+                    </ul>
+                </li>
+                <li><strong>Proof Generation</strong>:
+                    <ul>
+                        <li>Provers execute the off-chain logic and generate STARK proofs.</li>
+                        <li>These proofs are then wrapped into Groth16 SNARKs for efficient on-chain verification.</li>
+                    </ul>
+                </li>
+                <li><strong>On-Chain Callback</strong>:
+                    <ul>
+                        <li>The SNARK proof is submitted to the Solana blockchain for verification.</li>
+                    </ul>
+                </li>
+                <li><strong>Proof Verification:</strong>
+                    <ul>
+                        <li>Once verified, the results are forwarded to the requesting program via a callback program.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <figure>
+                <img src="../images/bonsol-blackword-logo.png" alt="Bonsol In Action">
+                <figcaption>Bonsol In Action</figcaption>
+            </figure>
+
+            <h1>5 Things to Build on Bonsol</h1>
+            <p>Bonsol unlocks a broad spectrum of applications that were previously constrained by on-chain computation limits. Below is an simplified overview of ideas for what can be built on Bonsol today:</p>
+
+            <table>
+                <tr>
+                    <th><strong>Use Case</strong></th>
+                    <th><strong>Description</strong></th>
+                    <th><strong>Example</strong></th>
+                </tr>
+                <tr>
+                    <td>Verifiable Agents</td>
+                    <td>Fully autonomous, provably secure agents that operate without human intervention.</td>
+                    <td>Decentralized, yield-generating trading bots with cryptographic proofs ensuring no tampering.</td>
+                </tr>
+                <tr>
+                    <td>Storage and Transaction Proofs</td>
+                    <td>Prove historical ownership, chain of ownership, or that a specific event occurred on-chain.</td>
+                    <td>Verifiable database ensuring data integrity and correctness of historical transaction data.</td>
+                </tr>
+                <tr>
+                    <td>Provable Game Engines</td>
+                    <td>Novel game mechanics by outsourcing simulations or engine logic off-chain.</td>
+                    <td>Asynchronous strategy games like <a href="http://shoshin.gg/">Shoshin.gg</a> that rely on off-chain computations.</td>
+                </tr>
+                <tr>
+                    <td>Private Liquidity Pools</td>
+                    <td>Liquidity pools where balances are provable without revealing depositors or traders.</td>
+                    <td>Execute private order fills within pools while avoiding slippage entirely through private proofs.</td>
+                </tr>
+                <tr>
+                    <td>Cross-Chain Activity Proofs</td>
+                    <td>Provide trust-minimized proofs of activity between chains to enable secure cross-chain operations.</td>
+                    <td>Prove activity on a destination chain before releasing funds on a home-chain during swaps.</td>
+                </tr>
+            </table>
+
+            <h1>Technical Advantages of Bonsol</h1>
+            <h3><strong>1. Groth16 SNARKs</strong></h3>
+            <p>Bonsol employs Groth16 SNARKs for proof generation due to their unique benefits:</p>
+            <ul>
+                <li>Constant-size proofs regardless of computational complexity.</li>
+                <li>Rapid verification times essential for real-time dApp interactions.</li>
+                <li>Efficient implementation tailored for Solana's architecture.</li>
+            </ul>
+
+            <h3><strong>2. Native Integration with Solana</strong></h3>
+            <p>Bonsol implements native Groth16 verifiers on Solana, enabling:</p>
+            <ul>
+                <li>Verification within 200k CU limits.</li>
+                <li>Composability with other smart contracts in the same transaction.</li>
+            </ul>
+
+            <h3><strong>3. Incentivized Prover Network</strong></h3>
+            <p>Bonsol's distributed prover network ensures fast execution of zkPrograms through an auction-like mechanism:</p>
+            <ul>
+                <li>Provers compete to claim execution requests based on economic incentives.</li>
+                <li>A dynamic fee structure rewards provers for timely proof generation while penalizing delays or malicious behavior.</li>
+            </ul>
+
+            <hr>
+
+            <h1>Community Involvement and Future Roadmap</h1>
+            <p>Bonsol is more than just a tool — it's a community-driven initiative aimed at fostering innovation within the Solana ecosystem. We drew heavy inspiration from the Optimism Collective, who pioneered a new model of digital democratic governance optimized to drive rapid and sustained growth of a decentralized ecosystem. Similarly, development of Bonsol is 100% open-source and we are starting the Bonsol Collective — a band of people, projects, and companies collaborating to build a stronger ecosystem for Solana and govern the protocol together. The project is currently live on both Mainnet and Devnet, allowing developers to experiment and contribute immediately.</p>
+
+            <h1>Future Development Goals</h1>
+            <ol>
+                <li>Enhance proving mechanisms for greater efficiency.</li>
+                <li>Explore integration with restaking protocols for additional security layers.</li>
+                <li>Conduct comprehensive audits to prepare Bonsol for handling billions of dollars in transactions.</li>
+            </ol>
+
+            <p>If you're passionate about shaping the future of decentralized computation and learning how Bonsol can unlock capabilities in your application — get in touch with us <a href="https://t.me/bonsolsh">here</a>.</p>
+
+            <hr>
+
+            <h1>Conclusion</h1>
+            <p>Bonsol represents a paradigm shift in how computationally intensive applications can be built on blockchain networks such as Solana. By bridging the gap between off-chain compute power and on-chain verification, it empowers developers to create groundbreaking dApps without being constrained by existing limitations.</p>
+
+            <p>As Solana continues its journey towards becoming the home of internet-scale capital markets, we are building Bonsol to play a critical role in driving innovation and adoption across multiple industries. Whether you're building next-gen DeFi protocols or privacy-preserving applications, Bonsol offers the flexibility and scalability needed to turn your vision into reality.</p>
+
+            <p>If you're ready to explore infinite compute possibilities on Solana, start building with Bonsol today!</p>
+
+            <h3>Learn more about Bonsol:</h3>
+            <p><a href="https://bonsol.org/">Website</a> | <a href="https://bonsol.gitbook.io/docs/core-concepts/introduction">Docs</a> | <a href="https://github.com/anagrambuild/bonsol">GitHub</a> | <a href="https://x.com/Bonsolsh">Twitter</a> | <a href="https://t.me/bonsolsh">Telegram</a></p>
+        </div>
+    </div>
+</body>
+</html> 
