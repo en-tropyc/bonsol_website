@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonsol: Infinite Compute for Solana</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/bonsol-Square-Favicon.png">
+    <style>
+        /* Monospace styling */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 0;
+            background: #fff;
+            color: #333;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        /* Content styling */
+        .content {
+            background: #fff;
+            padding: 0;
+            border: none;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Simplified Navigation styling */
+        .nav {
+            background: #fff;
+            padding: 1rem 0;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            max-width: 200px;
+            height: auto;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            margin-right: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .nav a.active {
+            text-decoration: underline;
+        }
+        pre {
+            background: #fff;
+            padding: 0;
+            overflow-x: auto;
+            margin: 0;
+            text-align: left;
+            margin-right: 300px;  /* Same alignment as token.html */
+        }
+        .logo {
+            max-width: 300px; /* adjust this value as needed */
+            height: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        /* Horizontal line styling */
+        hr {
+            border: none;
+            height: 1px;
+            margin: 2rem 0;
+            background: repeating-linear-gradient(90deg,
+                #333,
+                #333 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .solid-hr {
+            border: none;
+            height: 1px;
+            background-color: #333;
+            margin: 0rem 0;
+        }
+
+        /* Blog post specific styles */
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-post img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+        }
+
+        .blog-post table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .blog-post th, .blog-post td {
+            border: 1px solid #333;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .blog-post th {
+            background-color: #f5f5f5;
+        }
+
+        .blog-post figure {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .blog-post figure img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog-post figure figcaption {
+            margin-top: 0.5rem;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <nav class="nav">
+            <img src="../images/bonsol-blackword-logo.png" alt="Bonsol" class="nav-logo">
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../collective.html">Collective</a>
+                <a href="../blog.html" class="active">Blog</a>
+                <a href="https://bonsol.gitbook.io/docs" target="_blank">Docs</a>
+                <a href="https://x.com/bonsol_labs" target="_blank">X</a>
+            </div>
+        </nav>
+        <hr class="solid-hr">
+
+        <div class="blog-post">
+            <img src="../images/BonsolCollective-Announcement.png" alt="Bonsol Blog Post Header" style="width: 100%; margin: 2rem 0;">
+            <h1>Bonsol Collective Official Launch</h1>
+
+            <p>Bonsol Collective is a growing community of builders, researchers, and partners passionate about advancing verifiable compute on Solana and dedicated to supporting the development of the Bonsol ecosystem. 
+                Heavily inspired by the Optimism Collective, Bonsol is a <strong>public good for enabling verifiable compute on Solana</strong>. By gathering specialized teams and interesting applications across different layers of the Bonsol tech stack, we hope to build upon the strength of each Collective Member to create the most useful network infrastructure and leverage the power of open-source development to scale the growth of Bonsol.</p>
+            <p>Whether you’re interested in <strong>running a prover node, contributing code, or exploring zk-integrations </strong>with your project, we’d love to hear from you!</p>
+
+            <!-- <hr> -->
+
+            <h1>Co-Founders</h1>
+            <p>Bonsol is founded by <a href="https://www.anagram.xyz/" target="_blank">Anagram</a> and <a href="https://zerocomputing.com/" target="_blank">Zero Computing</a>. By combining the strengths of Anagram, <i>an experienced venture building firm with expertise in developing early-stage Solana protocols</i>, with Zero Computing, <i>a compute orchestration platform to make zero-knowledge proof generation fast and efficient</i>, we have built the foundational tech to enable verifiable compute on Solana and are poised to help grow the ecosystem with the rest of the Bonsol Collective.</p>
+            <figure>
+                <img src="../images/Anagram&ZC-BonsolCollective-Announcement.png" alt="Bonsol Co-Founders">
+            </figure>
+
+            <h1>Anagram 🤝🏼 Bonsol Collective</h1>
+            <p>At <a href="https://www.anagram.xyz/" target="_blank">Anagram</a>, we're excited about Bonsol because it unlocks a powerful new paradigm for zero-knowledge applications on Solana. By thoughtfully designing Bonsol with Solana developers in mind, Bonsol makes it easy to incorporate off-chain computation and on-chain verification into existing workflows. We believe this approach will spark a wave of creativity and exploration, enabling zk use-cases that were previously impractical or impossible.</p>
+            <figure>
+                <img src="../images/Anagram-BonsolCollective-Announcement.png" alt="Anagram joins Bonsol Collective">
+            </figure>
+
+            <h1>Zero Computing 🤝🏼 Bonsol Collective</h1>
+            <p>At <a href="https://zerocomputing.com/" target="_blank">Zero Computing</a>, we're driven by the vision of unlocking entirely new use cases on Solana. As a ZK hyperscaler with proving operations across 8 different networks, we’ve learned a tremendous amount about proving networks from a prover’s perspective. Bonsol embodies these learnings to enable a new paradigm of applications backed by fair and sustainable economics. We’re incredibly excited to be building one of the cornerstones of a trustless and verifiable internet capital market.</p>
+            <figure>
+                <img src="../images/ZC-BonsolCollective-Announcement.png" alt="Anagram joins Bonsol Collective">
+            </figure>
+
+            <h1>Come Join Us!</h1>
+            <p>Stay tuned in the coming weeks to hear from early Collective Members we’ve been closely working with, ranging from prover nodes, fellow industry builders, apps with zk-integrations, and more. If you find this interesting and want to come build with us, we’d love to hear from you! Reach out with the links below.</p>
+            
+            <!-- footer -->
+             <br>
+            <h3>Start building on Bonsol today:</h3>
+            <p><a href="https://bonsol.org/">Website</a> | <a href="https://bonsol.gitbook.io/docs">Docs</a> | <a href="https://github.com/bonsol-collective/bonsol">GitHub</a> | <a href="https://x.com/bonsol_labs">X</a> | <a href="https://t.me/bonsolsh">Telegram</a></p>
+        </div>
+    </div>
+</body>
+</html> 
