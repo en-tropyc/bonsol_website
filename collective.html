@@ -234,7 +234,7 @@ Building the future together
                      data-title="Everstake" 
                      data-description="Everstake is the leading institutional-grade staking infrastructure and services provider, trusted by over 735,000 users with $6.5 billion in staked assets. Its high-performance servers, broadband channels, and advanced network topology ensure our 99.9% uptime across supported networks. With six years of experience and operations on 85 blockchains, Everstake offers reliable and diverse staking solutions for both institutions and everyday crypto holders."
                      data-twitter="https://x.com/everstake_pool"
-                     data-website="https://everstake.one/"> 
+                     data-website="https://everstake.one/"> ]
                     <img src="images/everstake-Logo.png" alt="Everstake Logo" title="Everstake">
                 </div>
 
@@ -271,17 +271,19 @@ Building the future together
                     <img src="images/8bitoracle-Logo-black-yik.png" alt="8bit Oracle Logo" title="8bit Oracle" style="max-width: 350px;">
                 </div>
 
-                <!-- empty placeholder for formatting 
-                <div class = "logo-item">
-                </div> -->
-
-                <!-- MaKo  --> <!--
-                <div class="logo-item" style="margin-top: 18px;"
-                     data-title="MaKo" 
-                     data-description="MaKo is working on..."
-                     data-twitter="https://x.com/dubbel06">
-                    <img src="images/mako-Logo.jpg" alt="Mako Logo" title="Mako">
+                <!-- Rubicon / MaKo  -->
+                <div class="logo-item" style="margin-top: 10px;"
+                     data-title="Rubicon" 
+                     data-description="Rubicon redefines ownership in web3 gaming. Using a custom verifiable turn-based engine built leveraging Bonsol's zero-knowledge infrastructure on Solana, it empowers decentralized autobattlers where players don't just own assets or NFTs, they own the game. Rubicon puts game logic, operations, and the future of worlds themselves in the hands of game communities. In order to dogfood the Rubicon engine, <a href='https://x.com/dubbel06'>@dubbel06</a> and team are concurrently developing MaKo: a turn-based mech autobattler, with a complex game loop. Players compete in PvP and PvE scenarios to capture resources."
+                     data-twitter="https://x.com/rubiconengine">
+                    <img src="images/rubi_title_b.png" alt="Rubicon Logo" title="Rubicon" style="max-width: 350px;">
                 </div>
+
+                <!-- empty placeholder for formatting -->
+                <div class = "logo-item">
+                </div>
+
+
 
                 <!-- Lotus Sutra  --> <!--
                 <div class="logo-item" style="margin-top: 18px;"
@@ -331,7 +333,7 @@ Building the future together
                 
                 // Update and show modal
                 modalTitle.textContent = title;
-                modalDescription.textContent = description;
+                modalDescription.innerHTML = description;
                 
                 // Get the links div
                 const linksDiv = document.querySelector('.modal-links');
