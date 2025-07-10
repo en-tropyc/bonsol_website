@@ -15,8 +15,8 @@ jobs:
 
       - name: Fetch traffic JSON
         run: |
-          gh api repos/${{ github.repository }}/traffic/clones?per=day > clones.json
-          gh api repos/${{ github.repository }}/traffic/views?per=day  > views.json
+          gh api repos/bonsol-collective/bonsol/traffic/clones?per=day > clones.json
+          gh api repos/bonsol-collective/bonsol/traffic/views?per=day  > views.json
 
       - name: Build yesterday's CSV row
         id: csv
