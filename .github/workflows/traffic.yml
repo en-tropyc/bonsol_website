@@ -26,8 +26,10 @@ jobs:
           utc_yest = (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
           def row(path, key):
               data = json.load(open(path))[key]
-              item = next(d for d in data if d['timestamp'].startswith(utc_yest))
-              return item['count'], item['uniques']
+              for d in data:
+                  if d['timestamp'].startswith(utc_yest):
+                      return d['count'], d['uniques']
+              return 0, 0  # Default to zero if no data found
           c_cnt, c_uni = row('clones.json', 'clones')
           v_cnt, v_uni = row('views.json',  'views')
           pathlib.Path('data').mkdir(exist_ok=True)
