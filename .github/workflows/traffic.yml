@@ -24,6 +24,19 @@ jobs:
           python <<'PY'
           import json, datetime, csv, os, pathlib
           utc_yest = (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+          
+          # Debug: Show what date we're looking for
+          print(f"Looking for data for date: {utc_yest}")
+          
+          # Debug: Show what data we actually have
+          with open('clones.json', 'r') as f:
+              clones_data = json.load(f)
+              print(f"Clones data available dates: {[d['timestamp'][:10] for d in clones_data['clones']]}")
+          
+          with open('views.json', 'r') as f:
+              views_data = json.load(f)
+              print(f"Views data available dates: {[d['timestamp'][:10] for d in views_data['views']]}")
+          
           def row(path, key):
               data = json.load(open(path))[key]
               for d in data:
@@ -32,6 +45,9 @@ jobs:
               return 0, 0  # Default to zero if no data found
           c_cnt, c_uni = row('clones.json', 'clones')
           v_cnt, v_uni = row('views.json',  'views')
+          
+          print(f"Data found - Clones: {c_cnt}/{c_uni}, Views: {v_cnt}/{v_uni}")
+          
           pathlib.Path('data').mkdir(exist_ok=True)
           fn = 'data/traffic.csv'
           header = ['date','clone_count','clone_uniques','view_count','view_uniques']
@@ -40,6 +56,7 @@ jobs:
               w = csv.writer(f)
               if write_header: w.writerow(header)
               w.writerow([utc_yest,c_cnt,c_uni,v_cnt,v_uni])
+          print(f"CSV file created/updated with data for {utc_yest}")
           print(f"::set-output name=changes::{'true'}")
           PY
 
@@ -47,7 +64,21 @@ jobs:
         run: |
           git config --global user.email "traffic-bot@users.noreply.github.com"
           git config --global user.name  "Traffic Bot"
+          
+          # Debug: Show file status and contents
+          echo "=== Git status ==="
+          git status --porcelain
+          echo "=== Checking for traffic.csv file ==="
+          ls -la data/
+          if [ -f "data/traffic.csv" ]; then
+            echo "=== Contents of traffic.csv ==="
+            cat data/traffic.csv
+          else
+            echo "traffic.csv file not found!"
+          fi
+          
           if git status --porcelain | grep -q '^ M data/traffic.csv\|^?? data/traffic.csv'; then
+            echo "=== File detected as changed, committing ==="
             git add data/traffic.csv
             git commit -m "Traffic data for $(date -u +%F)"
             git push
