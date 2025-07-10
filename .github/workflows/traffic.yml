@@ -77,7 +77,7 @@ jobs:
             echo "traffic.csv file not found!"
           fi
           
-          if git status --porcelain | grep -q '^ M data/traffic.csv\|^?? data/traffic.csv'; then
+          if git status --porcelain | grep -q '^ M data/traffic.csv\|^?? data/traffic.csv\|^?? data/'; then
             echo "=== File detected as changed, committing ==="
             git add data/traffic.csv
             git commit -m "Traffic data for $(date -u +%F)"
