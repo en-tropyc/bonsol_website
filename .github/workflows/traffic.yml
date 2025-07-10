@@ -1,0 +1,54 @@
+name: Daily traffic snapshot
+on:
+  schedule:
+    - cron: '20 3 * * *'        # 03:20 UTC ≈ after previous day closes
+  workflow_dispatch:
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_PAT }}   # fine-grained PAT
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Fetch traffic JSON
+        run: |
+          gh api repos/${{ github.repository }}/traffic/clones?per=day > clones.json
+          gh api repos/${{ github.repository }}/traffic/views?per=day  > views.json
+
+      - name: Build yesterday's CSV row
+        id: csv
+        run: |
+          python <<'PY'
+          import json, datetime, csv, os, pathlib
+          utc_yest = (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+          def row(path, key):
+              data = json.load(open(path))[key]
+              item = next(d for d in data if d['timestamp'].startswith(utc_yest))
+              return item['count'], item['uniques']
+          c_cnt, c_uni = row('clones.json', 'clones')
+          v_cnt, v_uni = row('views.json',  'views')
+          pathlib.Path('data').mkdir(exist_ok=True)
+          fn = 'data/traffic.csv'
+          header = ['date','clone_count','clone_uniques','view_count','view_uniques']
+          write_header = not pathlib.Path(fn).exists()
+          with open(fn,'a',newline='') as f:
+              w = csv.writer(f)
+              if write_header: w.writerow(header)
+              w.writerow([utc_yest,c_cnt,c_uni,v_cnt,v_uni])
+          print(f"::set-output name=changes::{'true'}")
+          PY
+
+      - name: Commit if file changed
+        run: |
+          git config --global user.email "traffic-bot@users.noreply.github.com"
+          git config --global user.name  "Traffic Bot"
+          if git status --porcelain | grep -q '^ M data/traffic.csv\|^?? data/traffic.csv'; then
+            git add data/traffic.csv
+            git commit -m "Traffic data for $(date -u +%F)"
+            git push
+          else
+            echo "No new data, nothing to commit."
+          fi 
