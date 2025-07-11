@@ -8,7 +8,7 @@ jobs:
   capture:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.BONSOL_READ_PAT }}   # PAT for reading bonsol traffic data
+      GH_TOKEN: ${{ secrets.GH_PAT }}   # PAT for reading bonsol traffic data
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
