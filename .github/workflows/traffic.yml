@@ -54,7 +54,7 @@ jobs:
           
           pathlib.Path('data').mkdir(exist_ok=True)
           fn = 'data/traffic.csv'
-          header = ['date','clone_count','clone_uniques','view_count','view_uniques']
+          header = ['date','Total Cloned','Unique Cloned','Total Views','Unique Views']
           
           # Check if file exists and read existing data
           existing_dates = set()
