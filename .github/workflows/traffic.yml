@@ -1,4 +1,5 @@
 name: Daily traffic snapshot
+# Tracks daily traffic data for bonsol-collective/bonsol repository
 on:
   schedule:
     - cron: '20 3 * * *'        # 03:20 UTC ≈ after previous day closes
@@ -15,8 +16,9 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
 
-      - name: Fetch traffic JSON
+      - name: Fetch traffic JSON from bonsol-collective/bonsol
         run: |
+          echo "Fetching traffic data for bonsol-collective/bonsol repository..."
           gh api repos/bonsol-collective/bonsol/traffic/clones?per=day > clones.json
           gh api repos/bonsol-collective/bonsol/traffic/views?per=day  > views.json
 
@@ -25,7 +27,7 @@ jobs:
         run: |
           python <<'PY'
           import json, datetime, csv, os, pathlib
-          utc_yest = (datetime.datetime.utcnow() - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+          utc_yest = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
           
           # Debug: Show what date we're looking for
           print(f"Looking for data for date: {utc_yest}")
@@ -59,7 +61,10 @@ jobs:
               if write_header: w.writerow(header)
               w.writerow([utc_yest,c_cnt,c_uni,v_cnt,v_uni])
           print(f"CSV file created/updated with data for {utc_yest}")
-          print(f"::set-output name=changes::{'true'}")
+          
+          # Set output for next step (replaces deprecated set-output)
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"changes=true\n")
           PY
 
       - name: Commit if file changed
@@ -71,8 +76,9 @@ jobs:
           
           if git status --porcelain | grep -q '^ M data/traffic.csv\|^?? data/traffic.csv\|^?? data/'; then
             git add data/traffic.csv
-            git commit -m "Traffic data for $(date -u +%F)"
+            git commit -m "traffic data for bonsol-collective/bonsol repo - $(date -u +%F)"
             git push origin main
+            echo "Successfully committed traffic data for $(date -u +%F)"
           else
             echo "No new data, nothing to commit."
           fi 
