@@ -68,6 +68,13 @@ jobs:
           if git status --porcelain | grep -q '^ M data/traffic.csv\|^?? data/traffic.csv\|^?? data/'; then
             git add data/traffic.csv
             git commit -m "Traffic data for $(date -u +%F)"
+            # Debug: Check if the secret exists
+            if [ -z "${{ secrets.BONSOL_WEBSITE_WRITE_PAT }}" ]; then
+              echo "ERROR: BONSOL_WEBSITE_WRITE_PAT secret is not set!"
+              exit 1
+            else
+              echo "BONSOL_WEBSITE_WRITE_PAT secret is available"
+            fi
             # Use PAT directly in the push command
             git push https://x-access-token:${{ secrets.BONSOL_WEBSITE_WRITE_PAT }}@github.com/${{ github.repository }}.git main
           else
