@@ -55,11 +55,27 @@ jobs:
           pathlib.Path('data').mkdir(exist_ok=True)
           fn = 'data/traffic.csv'
           header = ['date','clone_count','clone_uniques','view_count','view_uniques']
-          write_header = not pathlib.Path(fn).exists()
-          with open(fn,'a',newline='') as f:
-              w = csv.writer(f)
-              if write_header: w.writerow(header)
-              w.writerow([utc_yest,c_cnt,c_uni,v_cnt,v_uni])
+          
+          # Check if file exists and read existing data
+          existing_dates = set()
+          if pathlib.Path(fn).exists():
+              with open(fn, 'r', newline='') as f:
+                  reader = csv.reader(f)
+                  next(reader, None)  # Skip header
+                  for row in reader:
+                      if row and len(row) > 0:
+                          existing_dates.add(row[0])
+          
+          # Only write if this date doesn't already exist
+          if utc_yest not in existing_dates:
+              write_header = not pathlib.Path(fn).exists()
+              with open(fn,'a',newline='') as f:
+                  w = csv.writer(f)
+                  if write_header: w.writerow(header)
+                  w.writerow([utc_yest,c_cnt,c_uni,v_cnt,v_uni])
+              print(f"New data added for {utc_yest}")
+          else:
+              print(f"Data for {utc_yest} already exists, skipping to avoid duplicates")
           print(f"CSV file created/updated with data for {utc_yest}")
           
           # Set output for next step (replaces deprecated set-output)
