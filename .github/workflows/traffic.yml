@@ -8,7 +8,7 @@ jobs:
   capture:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.GH_PAT }}   # fine-grained PAT
+      GH_TOKEN: ${{ secrets.BONSOL_READ_PAT }}   # PAT for reading bonsol traffic data
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -65,26 +65,11 @@ jobs:
           git config --global user.email "traffic-bot@users.noreply.github.com"
           git config --global user.name  "Traffic Bot"
           
-          # Configure git to use our PAT for authentication
-          git config --global url."https://x-access-token:${{ secrets.GH_PAT }}@github.com/".insteadOf "https://github.com/"
-          
-          # Debug: Show file status and contents
-          echo "=== Git status ==="
-          git status --porcelain
-          echo "=== Checking for traffic.csv file ==="
-          ls -la data/
-          if [ -f "data/traffic.csv" ]; then
-            echo "=== Contents of traffic.csv ==="
-            cat data/traffic.csv
-          else
-            echo "traffic.csv file not found!"
-          fi
-          
           if git status --porcelain | grep -q '^ M data/traffic.csv\|^?? data/traffic.csv\|^?? data/'; then
-            echo "=== File detected as changed, committing ==="
             git add data/traffic.csv
             git commit -m "Traffic data for $(date -u +%F)"
-            git push
+            # Use PAT directly in the push command
+            git push https://x-access-token:${{ secrets.BONSOL_WEBSITE_WRITE_PAT }}@github.com/${{ github.repository }}.git main
           else
             echo "No new data, nothing to commit."
           fi 
