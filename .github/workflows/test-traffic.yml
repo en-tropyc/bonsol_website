@@ -1,0 +1,51 @@
+name: Test Traffic Workflow
+on:
+  push:
+    branches: [test-traffic]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GH_PAT }}
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Fetch traffic JSON
+        run: |
+          gh api repos/bonsol-collective/bonsol/traffic/clones?per=day > clones.json
+          gh api repos/bonsol-collective/bonsol/traffic/views?per=day > views.json
+
+      - name: Test data processing (without commit)
+        run: |
+          python <<'PY'
+          import json, datetime, csv, os, pathlib
+          utc_yest = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=1)).strftime('%Y-%m-%d')
+          
+          print(f"Looking for data for date: {utc_yest}")
+          
+          with open('clones.json', 'r') as f:
+              clones_data = json.load(f)
+              print(f"Clones data available dates: {[d['timestamp'][:10] for d in clones_data['clones']]}")
+          
+          with open('views.json', 'r') as f:
+              views_data = json.load(f)
+              print(f"Views data available dates: {[d['timestamp'][:10] for d in views_data['views']]}")
+          
+          def row(path, key):
+              data = json.load(open(path))[key]
+              for d in data:
+                  if d['timestamp'].startswith(utc_yest):
+                      return d['count'], d['uniques']
+              return 0, 0
+          
+          c_cnt, c_uni = row('clones.json', 'clones')
+          v_cnt, v_uni = row('views.json',  'views')
+          
+          print(f"Data found - Clones: {c_cnt}/{c_uni}, Views: {v_cnt}/{v_uni}")
+          print("TEST COMPLETE - No files will be committed")
+          PY 
